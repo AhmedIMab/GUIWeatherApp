@@ -1,0 +1,13 @@
+.element-heavy-rain {
+  height: 32px;
+  position: relative;
+  width: 32px;
+}
+
+.element-heavy-rain .outline-4 {
+  height: 28px;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 28px;
+}

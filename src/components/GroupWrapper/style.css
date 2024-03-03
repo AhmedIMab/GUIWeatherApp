@@ -1,0 +1,88 @@
+.group-wrapper {
+  background-color: #fffafa;
+  border-radius: 10px;
+  height: 138px;
+  position: relative;
+  width: 50px;
+}
+
+.group-wrapper .thirty-two-sunny {
+  height: 40px !important;
+  left: 5px !important;
+  position: absolute !important;
+  top: 36px !important;
+  width: 40px !important;
+}
+
+.group-wrapper .element-sunny-instance {
+  height: 35px !important;
+  width: 35px !important;
+}
+
+.group-wrapper .MON {
+  color: #000000;
+  font-family: "Convergence", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  left: 8px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 117px;
+  width: 35px;
+}
+
+.group-wrapper .element {
+  color: #000000;
+  font-family: "Calibri-Regular", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: -0.24px;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 83px;
+}
+
+.group-wrapper .div {
+  color: #000000;
+  font-family: "Calibri-Regular", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: -0.24px;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 18px;
+}
+
+.group-wrapper .text-wrapper-2 {
+  color: #898989;
+  font-family: "Convergence", Helvetica;
+  font-size: 10px;
+  font-weight: 400;
+  left: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 3px;
+  white-space: nowrap;
+}
+
+.group-wrapper .text-wrapper-3 {
+  color: #898989;
+  font-family: "Convergence", Helvetica;
+  font-size: 10px;
+  font-weight: 400;
+  left: 14px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 98px;
+  white-space: nowrap;
+}

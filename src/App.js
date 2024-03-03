@@ -1,10 +1,11 @@
 import React from 'react';
-import Weather from './components/Weather';
+import Weather from './Weather';
+import { IphoneProMax } from "./screens/IphoneProMax";
+
 const App = () => {
     return (
     <div>
-        <h1>Weather Forecast App</h1>
-        <Weather />
+        <IphoneProMax />
     </div>
     );
 };
