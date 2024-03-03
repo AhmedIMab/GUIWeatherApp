@@ -24,6 +24,40 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Inter:400|Convergence:400");
+      @font-face {
+        font-family: "Calibri-Bold";
+        src: url("https://anima-uploads.s3.amazonaws.com/projects/6516db3d3915e9964b3cb608/fonts/calibrib.ttf")
+        format("truetype");
+      }
+
+      @font-face {
+        font-family: "Calibri-Regular";
+        src: url("https://anima-uploads.s3.amazonaws.com/projects/609bac86cef20771db431fdc/fonts/calibri.ttf")
+        format("truetype");
+      }
+    </style>
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+      * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0px;
+        height: 100%;
+      }
+      /* a blue color as a generic focus style */
+      button:focus-visible {
+        outline: 2px solid #4a90e2 !important;
+        outline: -webkit-focus-ring-color auto 5px !important;
+      }
+      a {
+        text-decoration: none;
+      }
+    </style>
     <title>React App</title>
   </head>
   <body>

@@ -1,0 +1,1 @@
+export { ElementPartlyCloudy } from "./ElementPartlyCloudy";

@@ -1,0 +1,22 @@
+.element-partly-cloudy-wrapper {
+  height: 32px;
+  width: 32px;
+}
+
+.element-partly-cloudy-wrapper .outline-wrapper {
+  background-image: url(../../../static/img/outline.svg);
+  background-size: 100% 100%;
+  height: 28px;
+  left: 2px;
+  position: relative;
+  top: 2px;
+  width: 28px;
+}
+
+.element-partly-cloudy-wrapper .outline-5 {
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}

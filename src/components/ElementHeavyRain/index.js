@@ -1,0 +1,1 @@
+export { ElementHeavyRain } from "./ElementHeavyRain";

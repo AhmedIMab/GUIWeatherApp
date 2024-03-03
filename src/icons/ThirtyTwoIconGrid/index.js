@@ -1,0 +1,1 @@
+export { ThirtyTwoIconGrid } from "./ThirtyTwoIconGrid";

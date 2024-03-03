@@ -1,0 +1,22 @@
+.open-weather {
+  background: radial-gradient(50% 50% at 50% 50%, rgb(49.3, 91.72, 34.39) 0%, rgb(186.07, 214.26, 176.17) 100%);
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  width: 180px;
+}
+
+.open-weather .text-wrapper {
+  color: #ffffff;
+  font-family: "Convergence", Helvetica;
+  font-size: 25px;
+  font-weight: 400;
+  left: 33px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 74px;
+  white-space: nowrap;
+}
