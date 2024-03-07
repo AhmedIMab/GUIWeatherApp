@@ -1,1 +1,1 @@
-export { OpenWeather } from "./OpenWeather";
+export { Symptom } from "./Symptom";

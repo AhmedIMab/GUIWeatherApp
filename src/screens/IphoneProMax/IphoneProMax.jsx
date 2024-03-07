@@ -6,7 +6,7 @@ import { ElementPartlyCloudyWrapper } from "../../components/ElementPartlyCloudy
 import { ElementSunny } from "../../components/ElementSunny";
 import { Group } from "../../components/Group";
 import { GroupWrapper } from "../../components/GroupWrapper";
-import { OpenWeather } from "../../components/Symptoms";
+import { Symptom } from "../../components/Symptoms";
 import { Clouds } from "../../icons/Clouds";
 import { IconsMenu24Px } from "../../icons/IconsMenu24Px";
 import "../../index.css";
@@ -14,24 +14,6 @@ import "../../index.css";
 export const IphoneProMax = () => {
   return (
       <div className="iphone-pro-max">
-        <img className="rectangle" alt="Rectangle" src="/rectangle-2.png" />
-        <div className="overlap-2">
-          <div className="text-wrapper-4">AQI</div>
-          <div className="text-wrapper-5">Pollen</div>
-          <div className="text-wrapper-6">UVI</div>
-          <div className="group-2">
-            <OpenWeather className="open-weather-symptoms-box" />
-            <div className="div-wrapper">
-              <div className="text-wrapper-7">UVI</div>
-            </div>
-            <div className="open-weather-2">
-              <div className="text-wrapper-7">AQI</div>
-            </div>
-            <div className="AQI-wrapper">
-              <div className="AQI">Pollen</div>
-            </div>
-          </div>
-        </div>
         <div className="overlap-3">
           <div className="overlap-3">
             <div className="overlap-4">
@@ -158,6 +140,12 @@ export const IphoneProMax = () => {
             text2="29°"
         />
         <img className="doc" alt="Doc" src="/doc-icont2-2.png" />
-      </div>
+        <div className="symptoms-box-container">
+          <Symptom name="Humidity" className="humidity" />
+          <Symptom name="UVI" className="uvi" />
+          <Symptom name="AQI" className="aqi" />
+          <Symptom name="Pollen" className="pollen" />
+        </div>
+    </div>
   );
 };

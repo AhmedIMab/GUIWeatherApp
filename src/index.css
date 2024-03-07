@@ -66,27 +66,31 @@
   width: 86px;
 }
 
-.iphone-pro-max .group-2 {
+/* Currently using absolute positioning, change later */
+.iphone-pro-max .symptoms-box-container {
   height: 388px;
-  left: 0;
+  left: 20px;
   position: absolute;
-  top: 0;
+  top: 525px;
   width: 383px;
 }
 
-.iphone-pro-max .open-weather-symptoms-box {
+.iphone-pro-max .humidity {
   background: radial-gradient(
           50% 50% at 50% 50%,
           rgb(112.27, 161.84, 94.86) 0%,
           rgb(186.07, 214.26, 176.17) 100%
-  ) !important;
-  border-radius: 100px !important;
-  left: 0 !important;
-  position: absolute !important;
-  top: 0 !important;
+  ) ;
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 180px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 180px;
 }
 
-.iphone-pro-max .div-wrapper {
+.iphone-pro-max .pollen {
   background: radial-gradient(50% 50% at 50% 50%, rgb(245.43, 194.43, 95.44) 0%, rgb(239.05, 220.09, 183.27) 100%);
   border-radius: 100px;
   box-shadow: 0px 4px 4px #00000040;
@@ -97,6 +101,35 @@
   top: 208px;
   width: 180px;
 }
+
+.iphone-pro-max .aqi {
+  background: radial-gradient(50% 50% at 50% 50%, rgb(255, 104.12, 113.18) 0%, rgb(246.13, 177.08, 181.22) 100%);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 180px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 208px;
+  width: 180px;
+}
+
+.iphone-pro-max .uvi {
+  background: radial-gradient(50% 50% at 50% 50%, rgb(205.76, 193.53, 83.45) 0%, rgb(236.93, 230.15, 169.14) 100%);
+  border-radius: 100px;
+  box-shadow: 0px 4px 4px #00000040;
+  height: 180px;
+  left: 203px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 180px;
+}
+
+
+
+
+
 
 .iphone-pro-max .text-wrapper-7 {
   color: #ffffff;
@@ -111,29 +144,7 @@
   white-space: nowrap;
 }
 
-.iphone-pro-max .open-weather-2 {
-  background: radial-gradient(50% 50% at 50% 50%, rgb(255, 104.12, 113.18) 0%, rgb(246.13, 177.08, 181.22) 100%);
-  border-radius: 100px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 180px;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  top: 208px;
-  width: 180px;
-}
 
-.iphone-pro-max .AQI-wrapper {
-  background: radial-gradient(50% 50% at 50% 50%, rgb(205.76, 193.53, 83.45) 0%, rgb(236.93, 230.15, 169.14) 100%);
-  border-radius: 100px;
-  box-shadow: 0px 4px 4px #00000040;
-  height: 180px;
-  left: 203px;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  width: 180px;
-}
 
 .iphone-pro-max .AQI {
   color: #ffffff;
