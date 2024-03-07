@@ -9,10 +9,14 @@ import "./style.css";
 export const Symptom = (props) => {
   return (
     <div className={`symptom ${props.className}`}>
-{/*
-        <button className="text-wrapper">{props.className}</button>
-*/}
-        <div className={`text-wrapper ${props.className}`}>{props.name}</div>
+        {/*This happens because onClick={SymptomClicked(props)} directly invokes SymptomClicked(props) and
+        assigns its return value as the event handler, rather than assigning
+        SymptomClicked itself as the event handler and so the function is called instantly .*/}
+        <button className="text-wrapper-symptom-button" onClick={() => SymptomClicked(props)}>{props.name}</button>
     </div>
   );
 };
+
+function SymptomClicked (Symptom) {
+    console.log("Well clicked " + Symptom.className);
+}
