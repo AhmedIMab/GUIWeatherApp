@@ -1,1 +1,1 @@
-export { Symptom } from "./Symptom";
+export { Condition } from "./Condition";

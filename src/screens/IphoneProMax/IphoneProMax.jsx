@@ -6,7 +6,7 @@ import { ElementPartlyCloudyWrapper } from "../../components/ElementPartlyCloudy
 import { ElementSunny } from "../../components/ElementSunny";
 import { Group } from "../../components/Group";
 import { GroupWrapper } from "../../components/GroupWrapper";
-import { Symptom } from "../../components/Symptoms";
+import { Condition } from "../../components/Symptoms";
 import { Clouds } from "../../icons/Clouds";
 import { IconsMenu24Px } from "../../icons/IconsMenu24Px";
 import "../../index.css";
@@ -141,10 +141,10 @@ export const IphoneProMax = () => {
         />
         <img className="doc" alt="Doc" src="/doc-icont2-2.png" />
         <div className="symptoms-box-container">
-          <Symptom name="Humidity" className="humidity" />
-          <Symptom name="UVI" className="uvi" />
-          <Symptom name="AQI" className="aqi" />
-          <Symptom name="Pollen" className="pollen" />
+          <Condition Name="Humidity" className="humidity" />
+          <Condition Name="Pollen" className="pollen" />
+          <Condition Name="AQI" className="aqi" />
+          <Condition Name="UVI" className="uvi" />
         </div>
     </div>
   );
