@@ -6,6 +6,7 @@ const App = () => {
     return (
     <div>
         <IphoneProMax />
+        <Weather />
     </div>
     );
 };
