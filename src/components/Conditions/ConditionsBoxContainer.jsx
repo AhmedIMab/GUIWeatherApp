@@ -1,27 +1,35 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import React, {useState} from "react";
 import "./style.css";
 
-export const Condition = (props) => {
-    // The showDataBox variable is what is the current state
-    // The setShowDataBox is set to false because that is the useState parameter
-    const [showDataBox, setShowDataBox] = useState(false);
+export const ConditionsBoxContainer = () => {
+    // Thx conditionSelected variable is what is the current state
+    // The setSelectedCondition is set to null because that is the useState parameter
+    // By changing the setSelectedCondition we can track the correct condition to open the box for
+    const [conditionSelected, setSelectedCondition] = useState(null);
 
-    function conditionClicked (Symptom) {
-        setShowDataBox(true);
+    function conditionClicked(condition) {
+        setSelectedCondition(condition);
     }
 
+    return (
+        <div className="conditions-box-container">
+            <Condition Name="Humidity" className="humidity" onClick={() => conditionClicked({Name: "Humidity", className: "humidity"})}/>
+            <Condition Name="Pollen" className="pollen" onClick={() => conditionClicked({Name: "Pollen", className: "pollen"})} />
+            <Condition Name="AQI" className="aqi" onClick={() => conditionClicked({Name: "AQI", className: "aqi"})}/>
+            <Condition Name="UVI" className="uvi" onClick={() => conditionClicked({Name: "UVI", className: "uvi"})} />
+
+            {conditionSelected && <SymptomDataBox Name={conditionSelected.Name} className={conditionSelected.className} />}
+        </div>
+    );
+};
+
+const Condition = (props) => {
     return (
         <div className={`condition ${props.className}`}>
             {/*This happens because onClick={SymptomClicked(props)} directly invokes SymptomClicked(props) and
             assigns its return value as the event handler, rather than assigning
             SymptomClicked itself as the event handler and so the function is called instantly .*/}
-            <button className="text-wrapper-symptom-button" onClick={() => conditionClicked(props)}>{props.Name}</button>
-            {showDataBox === true && <SymptomDataBox Name={props.Name} className={props.className} />}
+            <button className="text-wrapper-symptom-button" onClick={() => props.onClick(props.Name)}>{props.Name}</button>
         </div>
     );
 };
@@ -30,12 +38,14 @@ const SymptomDataBox = (props) => {
     const [symptoms, risks] = ConditionXSymptoms(props)
 
     return (
-        <div className="condition-symptoms-data-box">
+        <div className="symptoms-data-box">
             <div className="symptom-data-heading">
                 <img className="symptom-checker" src="/SymptomIcon.png" alt="an icon displaying a magnifying glass"/>
                 {/* Here add api call for determining condition*/}
                 <h2>{props.Name} - <span className="condition-severity">High</span></h2>
+                <div className="close-button">✖️</div>
             </div>
+
             <div className="symptoms-risks-area">
                 <div className="symptoms-data">
                     <h2 className="symptomrisk-title">Symptoms:</h2>

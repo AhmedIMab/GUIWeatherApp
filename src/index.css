@@ -66,13 +66,16 @@
   width: 86px;
 }
 
+
+/* CONDITIONS STYLING CODE */
+
 /* Currently using absolute positioning, change later */
-.iphone-pro-max .symptoms-box-container {
+.iphone-pro-max .conditions-box-container {
   height: 388px;
+  width: 383px;
   left: 20px;
   position: absolute;
   top: 525px;
-  width: 383px;
   display: flex;
 }
 
@@ -111,14 +114,26 @@
   top: 208px;
 }
 
-.condition-symptoms-data-box {
+.symptoms-data-box {
   font-family: "Inter", Helvetica;
+  display: flex;
+  flex-direction: column;
   position: absolute;
+  height: 388px;
+  width: 383px;
   top: 0;
   left: 0;
-  border: solid 2px darkblue;
+  border-radius: 10px;
   background-color: #CED9E6;
   padding: 0.5em;
+}
+
+.symptom-data-heading {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  gap: 20px;
 }
 
 .symptom-checker {
@@ -126,15 +141,10 @@
   height: 75px;
 }
 
-.symptom-data-heading {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-}
 
 .symptoms-risks-area {
   margin-top: 0.3em;
+  flex: 3;
 }
 
 .symptomriskX-text {
