@@ -1,4 +1,3 @@
-import React from "react";
 import { ElementCloudyClearAt } from "../../components/ElementCloudyClearAt";
 import { ElementHeavyRain } from "../../components/ElementHeavyRain";
 import { ElementPartlyCloudy } from "../../components/ElementPartlyCloudy";
@@ -6,7 +5,7 @@ import { ElementPartlyCloudyWrapper } from "../../components/ElementPartlyCloudy
 import { ElementSunny } from "../../components/ElementSunny";
 import { Group } from "../../components/Group";
 import { GroupWrapper } from "../../components/GroupWrapper";
-import { Condition } from "../../components/Symptoms";
+import { ConditionsBoxContainer} from "../../components/Conditions/ConditionsBoxContainer";
 import { Clouds } from "../../icons/Clouds";
 import { IconsMenu24Px } from "../../icons/IconsMenu24Px";
 import "../../index.css";
@@ -140,12 +139,8 @@ export const IphoneProMax = () => {
             text2="29°"
         />
         <img className="doc" alt="Doc" src="/doc-icont2-2.png" />
-        <div className="symptoms-box-container">
-          <Condition Name="Humidity" className="humidity" />
-          <Condition Name="Pollen" className="pollen" />
-          <Condition Name="AQI" className="aqi" />
-          <Condition Name="UVI" className="uvi" />
-        </div>
+        <ConditionsBoxContainer />
     </div>
   );
 };
+
