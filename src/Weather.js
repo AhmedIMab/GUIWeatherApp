@@ -11,7 +11,6 @@ const Weather = () => {
     // forecast data
     const [forecastData, setForecastData] = useState(null); // all data combined
 
-
     // fetch data for real-time weather, air pollution, and UV index
     const fetchCurrentData = async () => {
         try {
@@ -24,10 +23,9 @@ const Weather = () => {
             const UVIndexData = await axios.get(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`);
             setLat(lat);
             setLon(lon);
-            console.log('Weather Data', weatherData.data);
             const weatherDataObject = {
                 city: weatherData.data.name,
-                temperature: weatherData.data.main.temp,
+                temperature: Math.round(weatherData.data.main.temp),
                 description: weatherData.data.weather[0].description,
                 humidity: weatherData.data.main.humidity,
                 aqi: airPollutionData.data.list[0].main.aqi,
@@ -44,17 +42,21 @@ const Weather = () => {
         try {
             // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
             const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min&timezone=Europe/London`);
-            // console.log('7-day forecast', weatherData.data);
-            // get max temperature for the next 7 days
-            const maxTemp = weatherData.data.daily.temperature_2m_max;
-            // get min temperature for the next 7 days
-            const minTemp = weatherData.data.daily.temperature_2m_min;
-            // set forecast data
             const forecastDataObject = {
-                maxTemp,
-                minTemp
+                // daily
+                dailyData : {
+                    maxTemp: weatherData.data.daily.temperature_2m_max,
+                    minTemp: weatherData.data.daily.temperature_2m_min,
+                    date: weatherData.data.daily.time 
+                },
+                hourlyData : {
+                    precipitationProbability: weatherData.data.hourly.precipitation_probability,
+                    temperature: weatherData.data.hourly.temperature_2m,
+                    date: weatherData.data.hourly.time
+                }
             };
-            setForecastData();
+            console.log('forecast data object', forecastDataObject);
+            setForecastData(forecastDataObject);
             // add is_day to the current weather data object
             const currentWeatherDataObject = {
                 ...currentWeatherData,
@@ -75,7 +77,7 @@ const Weather = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         fetchCurrentData();
-        fetchData();
+        // fetchData();
     };
 
     useEffect(() => {
