@@ -114,6 +114,17 @@
   top: 208px;
 }
 
+.iphone-pro-max .text-wrapper-symptom-button {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  font-family: "Convergence", Helvetica;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+}
+
 .symptoms-data-box {
   font-family: "Inter", Helvetica;
   display: flex;
@@ -121,11 +132,10 @@
   position: absolute;
   height: 388px;
   width: 383px;
-  top: 0;
-  left: 0;
   border-radius: 10px;
   background-color: #CED9E6;
-  padding: 0.5em;
+  padding: 1.2em;
+  font-size: 17px;
 }
 
 .symptom-data-heading {
@@ -134,6 +144,7 @@
   flex: 1;
   align-items: center;
   gap: 20px;
+  font-size: 20px;
 }
 
 .symptom-checker {
@@ -141,9 +152,20 @@
   height: 75px;
 }
 
+.symptomrisk-title {
+  margin-bottom: 0.9em;
+}
+
+.risk-title {
+  margin-bottom: 0.65em;
+}
+
+.risks-data {
+  margin-top: 0.9em;
+}
 
 .symptoms-risks-area {
-  margin-top: 0.3em;
+  margin-top: 0.6em;
   flex: 3;
 }
 
@@ -156,6 +178,16 @@
   border-radius: 10px;
   align-items: center;
   gap: 0.4em;
+}
+
+.page-control-image {
+  flex: 1;
+}
+
+.page-control-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /*.iphone-pro-max .text-wrapper-symptom {
@@ -171,18 +203,23 @@
   white-space: nowrap;
 }*/
 
-.iphone-pro-max .text-wrapper-symptom-button {
-  color: #ffffff;
-  background-color: transparent;
-  border: none;
-  font-family: "Convergence", Helvetica;
-  font-size: 25px;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-align: center;
 
+
+.close-button {
+  background: url(/public/close.png);
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.8em 0.8em 0 0;
+  border: none;
+  padding: 0;
 }
 
+
+/* Everything else */
 
 
 .iphone-pro-max .overlap-3 {
