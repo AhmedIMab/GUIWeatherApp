@@ -6,6 +6,7 @@ import { ElementSunny } from "../../components/ElementSunny";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { DailyWeather } from "../../components/DailyWeather";
 import { ConditionsBoxContainer} from "../../components/Conditions/ConditionsBoxContainer";
+import { TimeWrapper } from "../../components/TimeWrapper";
 import "../../index.css";
 
 export const IphoneProMax = () => {
@@ -36,15 +37,8 @@ export const IphoneProMax = () => {
       {/*Second section*/}
       <div className="weather-hourly">
         <div className="hourly-dock">
-          <div className="dock-section">
-            <div className="time">11:00</div>
-            <div className="time">12:00</div>
-            <div className="time">13:00</div>
-            <div className="time">14:00</div>
-            <div className="time">15:00</div>
-            <div className="time">16:00</div>
-            <div className="time">17:00</div>
-          </div>
+          <TimeWrapper />
+
           <div className="dock-section">
             <ElementPartlyCloudy className="dock-img" color="on" outline="/outline-17.svg" />
             <ElementPartlyCloudy className="dock-img" color="on" outline="/outline-15.svg" />
@@ -85,64 +79,7 @@ export const IphoneProMax = () => {
         </div>
       </div>
       
-      {/*Third section*/}
-      <div className="weather-weekly">
-        <DailyWeather 
-          className="day" 
-          colorOnWrapperOutline="/outline-27.svg" 
-          day="MON"
-          lowTemp="8°"
-          highTemp="18°"
-        />
-
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-25.svg"
-            day="TUE"
-            lowTemp="17°"
-            highTemp="23°"
-        />
-
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-23.svg"
-            day="WED"
-            lowTemp="20°"
-            highTemp="25°"
-        />
-
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-1.svg"
-            day="THU"
-            lowTemp="21°"
-            highTemp="29°"
-        />
-
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-19.svg"
-            day="FRI"
-            lowTemp="21°"
-            highTemp="29°"
-        />
-        
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-5.svg"
-            day="FRI"
-            lowTemp="26°"
-            highTemp="27°"
-        />
-        
-        <DailyWeather
-            className="day"
-            colorOnWrapperOutline="/outline-21.svg"
-            day="SUN"
-            lowTemp="15°"
-            highTemp="22°"
-        />
-      </div> 
+     <DailyWeather />
 
       {/*Fourth section*/}
       <ConditionsBoxContainer />
