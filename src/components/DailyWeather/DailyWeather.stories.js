@@ -1,17 +1,17 @@
-import { GroupWrapper } from ".";
+import { DailyWeather } from ".";
 
 export default {
-  title: "Components/GroupWrapper",
-  component: GroupWrapper,
+  title: "Components/DailyWeather",
+  component: DailyWeather,
 };
 
 export const Default = {
   args: {
     className: {},
     colorOnWrapperOutline: "/img/outline-31.svg",
-    text: "MON",
-    text1: "22°",
-    text2: "27°",
+    day: "MON",
+    lowTemp: "22°",
+    highTemp: "27°",
     colorOnWrapperHasOutline: true,
   },
 };
