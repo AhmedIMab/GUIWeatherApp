@@ -11,6 +11,10 @@ export const ConditionsBoxContainer = () => {
         setSelectedCondition(condition);
     }
 
+    function closeBox() {
+        setSelectedCondition(null);
+    }
+
     return (
         <div className="conditions-box-container">
             <Condition Name="Humidity" className="humidity" onClick={() => conditionClicked({Name: "Humidity", className: "humidity"})}/>
@@ -18,7 +22,8 @@ export const ConditionsBoxContainer = () => {
             <Condition Name="AQI" className="aqi" onClick={() => conditionClicked({Name: "AQI", className: "aqi"})}/>
             <Condition Name="UVI" className="uvi" onClick={() => conditionClicked({Name: "UVI", className: "uvi"})} />
 
-            {conditionSelected && <SymptomDataBox Name={conditionSelected.Name} className={conditionSelected.className} />}
+            {conditionSelected && <ConditionDataBox Name={conditionSelected.Name} className={conditionSelected.className} onClick={closeBox}/>
+                }
         </div>
     );
 };
@@ -34,7 +39,7 @@ const Condition = (props) => {
     );
 };
 
-const SymptomDataBox = (props) => {
+const ConditionDataBox = (props) => {
     const [symptoms, risks] = ConditionXSymptoms(props)
 
     return (
@@ -43,7 +48,7 @@ const SymptomDataBox = (props) => {
                 <img className="symptom-checker" src="/SymptomIcon.png" alt="an icon displaying a magnifying glass"/>
                 {/* Here add api call for determining condition*/}
                 <h2>{props.Name} - <span className="condition-severity">High</span></h2>
-                <div className="close-button">✖️</div>
+                <button className="close-button" onClick={props.onClick}></button>
             </div>
 
             <div className="symptoms-risks-area">
@@ -58,7 +63,7 @@ const SymptomDataBox = (props) => {
                     ))}
                 </div>
                 <div className="risks-data">
-                    <h2 className="symptomrisk-title">Risks:</h2>
+                    <h2 className="symptomrisk-title risk-title">Risks:</h2>
                     {risks.map((risk,index) =>(
                         <div className="symptomriskX-text">
                             <img src="/red-circle.svg" alt=""/>
@@ -66,6 +71,9 @@ const SymptomDataBox = (props) => {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="page-control-image">
+                <img src="/Page%20Control.png" alt=""/>
             </div>
 
         </div>
@@ -85,8 +93,8 @@ function ConditionXSymptoms(props) {
         return ([symptoms, risks])
     }
     else if (condition === "UVI") {
-        const symptoms = ['', '', ''];
-        const risks = ['']
+        const symptoms = ['Bumps', 'Red Blotchy Areas', 'Fever'];
+        const risks = ['Skin Cancer']
         return ([symptoms, risks])
     }
     else if (condition === "AQI") {
@@ -94,4 +102,9 @@ function ConditionXSymptoms(props) {
         const risks = ['Strokes']
         return ([symptoms, risks])
     }
+}
+
+
+const ConditionGraphBox = (props) => {
+
 }
