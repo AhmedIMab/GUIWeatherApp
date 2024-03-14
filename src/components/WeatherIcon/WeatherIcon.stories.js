@@ -1,8 +1,8 @@
-import { Group } from ".";
+import { WeatherIcon } from ".";
 
 export default {
-  title: "Components/Group",
-  component: Group,
+  title: "Components/WeatherIcon",
+  component: WeatherIcon,
 };
 
 export const Default = {

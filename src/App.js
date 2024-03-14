@@ -1,12 +1,12 @@
-import React from 'react';
-import Weather from './Weather';
+import React from "react";
+import Weather from "./Weather";
 import { IphoneProMax } from "./screens/IphoneProMax";
 
 const App = () => {
-    return (
+  return (
     <div>
-        <IphoneProMax />
+      <IphoneProMax />
     </div>
-    );
+  );
 };
 export default App;

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./style.css";
 
 export const ConditionsBoxContainer = () => {
-    // Thx conditionSelected variable is what is the current state
+    // The conditionSelected variable is what is the current state
     // The setSelectedCondition is set to null because that is the useState parameter
     // By changing the setSelectedCondition we can track the correct condition to open the box for
     const [conditionSelected, setSelectedCondition] = useState(null);
