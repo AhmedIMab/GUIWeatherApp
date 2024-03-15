@@ -7,23 +7,70 @@ export const ConditionsBoxContainer = () => {
     // By changing the setSelectedCondition we can track the correct condition to open the box for
     const [conditionSelected, setSelectedCondition] = useState(null);
 
+    // Here box: 1 is the main symptoms box
+    // box: 2 is the graph condition
+    const [currentBox, setBox] = useState(1)
+
+    function changeBox () {
+        if (currentBox === 1) {
+            setBox(2)
+        }
+        else {
+            setBox(1)
+        }
+    }
+
+    let arrow;
+    if (currentBox === 1) {
+        arrow = "arrow-right"
+    }
+    else {
+        arrow = "arrow-left"
+    }
+
     function conditionClicked(condition) {
         setSelectedCondition(condition);
     }
 
     function closeBox() {
         setSelectedCondition(null);
+        /* Also make sure the next time it's opened, it'll open the symptoms first */
+        setBox(1)
     }
 
     return (
         <div className="conditions-box-container">
-            <Condition Name="Humidity" className="humidity" onClick={() => conditionClicked({Name: "Humidity", className: "humidity"})}/>
-            <Condition Name="Pollen" className="pollen" onClick={() => conditionClicked({Name: "Pollen", className: "pollen"})} />
-            <Condition Name="AQI" className="aqi" onClick={() => conditionClicked({Name: "AQI", className: "aqi"})}/>
-            <Condition Name="UVI" className="uvi" onClick={() => conditionClicked({Name: "UVI", className: "uvi"})} />
+            {/* This will display the 4 condition buttons if nothing has been selected */}
+            {conditionSelected === null &&
+                (<div>
+                    <Condition Name="Humidity" className="humidity" onClick={() => conditionClicked({Name: "Humidity", className: "humidity"})}/>
+                    <Condition Name="Pollen" className="pollen" onClick={() => conditionClicked({Name: "Pollen", className: "pollen"})} />
+                    <Condition Name="AQI" className="aqi" onClick={() => conditionClicked({Name: "AQI", className: "aqi"})}/>
+                    <Condition Name="UVI" className="uvi" onClick={() => conditionClicked({Name: "UVI", className: "uvi"})} />
+                </div>)
+            }
 
-            {conditionSelected && <ConditionDataBox Name={conditionSelected.Name} className={conditionSelected.className} onClick={closeBox}/>
-                }
+            {/* The ternary operator below mimics an if, else if, else statement
+                If a condition has been selected and the current box is 1, the ? will evaluate and render the
+                ConditionDataBox
+                Else if a condition has been selected and the current box is 2, it will render ConditionGraphBox
+                Else nothing will happen
+            */}
+            {(conditionSelected && currentBox === 1) ? (
+                <ConditionDataBox Name={conditionSelected.Name}
+                                  className={conditionSelected.className}
+                                  onClick={closeBox}
+                                  switchButton={changeBox}
+                                  arrow={arrow}/>
+            ) : (conditionSelected && currentBox === 2) ? (
+                <ConditionGraphBox Name={conditionSelected.Name}
+                                   className={conditionSelected.className}
+                                   onClick={closeBox}
+                                   switchButton={changeBox}
+                                   arrow={arrow}/>
+            ) : null
+            }
+
         </div>
     );
 };
@@ -54,7 +101,7 @@ const ConditionDataBox = (props) => {
             <div className="symptoms-risks-area">
                 <div className="symptoms-data">
                     <h2 className="symptomrisk-title">Symptoms:</h2>
-                    {/* The map function will create a symptom for each one in the array*/}
+                    {/* The map function will create a symptom for each one in the array */}
                     {symptoms.map((symptom,index) =>(
                         <div className="symptomriskX-text">
                             <img src="/green-circle.svg" alt=""/>
@@ -75,7 +122,7 @@ const ConditionDataBox = (props) => {
             <div className="page-control-image">
                 <img src="/Page%20Control.png" alt=""/>
             </div>
-
+            <button className={props.arrow} onClick={props.switchButton}></button>
         </div>
     )
 }
@@ -106,5 +153,16 @@ function ConditionXSymptoms(props) {
 
 
 const ConditionGraphBox = (props) => {
+    return (
+        <div className="symptoms-data-box">
+            <div className="conditions-data-heading">
+                {/* Here add api call for determining condition*/}
+                <h2>{props.Name} this week</h2>
+                <button className="close-button" onClick={props.onClick}></button>
+            </div>
 
+
+            <button className={props.arrow} onClick={props.switchButton}></button>
+        </div>
+    )
 }
