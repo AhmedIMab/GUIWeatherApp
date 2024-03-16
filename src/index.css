@@ -169,9 +169,10 @@
 
 .iphone-pro-max .icon-wrapper {
   position: relative;
+  margin: auto;
   margin-top: 1%;
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-left: 6.15%;
+  margin-right: 6.15%;
 }
 
 .iphone-pro-max .temp-text {
@@ -182,9 +183,11 @@
   width: 90%;
   line-height: normal;
   position: relative;
+  /* margin: auto; */
+  text-align: center;
   margin-top: 1%;
-  margin-left: 5.1%;
-  margin-right: 5.1%;
+  /* margin-left: 3.9%;
+  margin-right: 3.9%; */
 }
 
 /*Group (drop) styling*/
