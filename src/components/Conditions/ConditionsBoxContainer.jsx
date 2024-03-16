@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import ConditionsChart from "./ConditionsChart.js";
 import "./style.css";
 
 export const ConditionsBoxContainer = () => {
@@ -156,12 +157,12 @@ const ConditionGraphBox = (props) => {
     return (
         <div className="symptoms-data-box">
             <div className="conditions-data-heading">
-                {/* Here add api call for determining condition*/}
-                <h2>{props.Name} this week</h2>
+                {/* Here add API call for determining condition*/}
+                <h2>Future {props.Name}</h2>
                 <button className="close-button" onClick={props.onClick}></button>
             </div>
-
-
+            <ConditionsChart Name={props.Name}
+                             className={props.className}/>
             <button className={props.arrow} onClick={props.switchButton}></button>
         </div>
     )
