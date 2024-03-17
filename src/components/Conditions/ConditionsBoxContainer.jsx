@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import ConditionsChart from "./ConditionsChart.js";
 import "./style.css";
 
-export const ConditionsBoxContainer = () => {
+export const ConditionsBoxContainer = ({ forecastData, currentWeatherData }) => {
     // The conditionSelected variable is what is the current state
     // The setSelectedCondition is set to null because that is the useState parameter
     // By changing the setSelectedCondition we can track the correct condition to open the box for

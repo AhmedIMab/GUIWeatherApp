@@ -11,7 +11,7 @@ import { WeatherTotal } from "../../components/WeatherTotal";
 import "../../index.css";
 
 
-export const IphoneProMax = () => {
+export const IphoneProMax = ({ forecastData, currentWeatherData }) => {
   return (
     <div className="iphone-pro-max">
       {/*First section*/}
@@ -40,7 +40,7 @@ export const IphoneProMax = () => {
       <WeatherTotal />
 
       {/*Fourth section*/}
-      <ConditionsBoxContainer />
+      <ConditionsBoxContainer forecastData={forecastData} currentWeatherData={currentWeatherData} />
       
     </div>
   );
