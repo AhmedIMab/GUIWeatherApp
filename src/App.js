@@ -12,7 +12,7 @@ const App = () => {
     // current weather data
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
     // forecast data
-    const [forecastData, setForecastData] = useState(null); // all data combined
+    const [forecastData, setForecastData] = useState(null);
 
     // fetch data for real-time weather, air pollution, and UV index
     const fetchCurrentData = async () => {
@@ -30,6 +30,7 @@ const App = () => {
                 city: weatherData.data.name,
                 temperature: Math.round(weatherData.data.main.temp),
                 description: weatherData.data.weather[0].description,
+                icon: weatherData.data.weather[0].icon,
                 humidity: weatherData.data.main.humidity,
                 aqi: airPollutionData.data.list[0].main.aqi,
                 uvIndex: UVIndexData.data.value
@@ -44,13 +45,46 @@ const App = () => {
     const fetchData = async () => {
         try {
             // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
-            const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min&timezone=Europe/London`);
+            const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe/London`);
+            console.log('weather data weather code', weatherData.data.daily.weather_code);
+            // change weather code to open weather map icon
+            const weatherCode = weatherData.data.daily.weather_code;
+            for (let i = 0; i < weatherData.data.daily.weather_code.length; i++) {
+                if (weatherCode[i] === 0) {
+                    weatherCode[i] = '01d';
+                }
+                else if (weatherCode[i] === 1) {
+                    weatherCode[i] = '02d';
+                }
+                else if (weatherCode[i] === 2) {
+                    weatherCode[i] = '03d';
+                }
+                else if (weatherCode[i] === 3) {
+                    weatherCode[i] = '04d';
+                }
+                else if (weatherCode[i] === 45 || weatherCode[i] === 48) {
+                    weatherCode[i] = '50d';
+                }
+                else if (50 < weatherCode[i] < 66) {
+                    weatherCode[i] = '09d';
+                }
+                else if (70 < weatherCode[i] < 80) {
+                    weatherCode[i] = '13d';
+                }
+                else if (79 < weatherCode[i] < 90) {
+                    weatherCode[i] = '10d';
+                }
+                else if (90 < weatherCode[i] < 100) {
+                    weatherCode[i] = '11d';
+                }
+            }
             const forecastDataObject = {
                 // daily
                 dailyData : {
                     maxTemp: weatherData.data.daily.temperature_2m_max,
                     minTemp: weatherData.data.daily.temperature_2m_min,
-                    date: weatherData.data.daily.time 
+                    date: weatherData.data.daily.time,
+                    icon: weatherCode
                 },
                 hourlyData : {
                     precipitationProbability: weatherData.data.hourly.precipitation_probability,
@@ -86,7 +120,10 @@ const App = () => {
   return (
     <div>
       <IphoneProMax />
+      {/* show the icon */}
+      { currentWeatherData ? <img src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`} alt="weather icon" /> : null }
     </div>
   );
 };
+
 export default App;
