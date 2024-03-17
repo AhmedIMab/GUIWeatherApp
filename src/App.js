@@ -1,5 +1,5 @@
-import React from 'react';
-import Weather from './Weather';
+import React from "react";
+import Weather from "./Weather";
 import { IphoneProMax } from "./screens/IphoneProMax";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -82,10 +82,11 @@ const App = () => {
         }
     }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return (
+
+  return (
     <div>
-        <IphoneProMax />
+      <IphoneProMax />
     </div>
-    );
+  );
 };
 export default App;
