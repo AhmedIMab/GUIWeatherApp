@@ -4,8 +4,8 @@ import axios from 'axios';
 const Weather = () => {
     // location
     const [city, setCity] = useState('London');
-    const [lat, setLat] = useState(null);
-    const [lon, setLon] = useState(null);
+    const [lat, setLat] = useState('51.5072');
+    const [lon, setLon] = useState('0.1276');
     // current weather data
     const [currentWeatherData, setCurrentWeatherData] = useState(null);
     // forecast data
