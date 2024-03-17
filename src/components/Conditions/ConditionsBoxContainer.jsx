@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import ConditionsChart from "./ConditionsChart.js";
 import "./style.css";
 
+
 export const ConditionsBoxContainer = ({ forecastData, currentWeatherData }) => {
     // The conditionSelected variable is what is the current state
     // The setSelectedCondition is set to null because that is the useState parameter
@@ -62,13 +63,17 @@ export const ConditionsBoxContainer = ({ forecastData, currentWeatherData }) => 
                                   className={conditionSelected.className}
                                   onClick={closeBox}
                                   switchButton={changeBox}
-                                  arrow={arrow}/>
+                                  arrow={arrow}
+                                  currentWeatherData={currentWeatherData}
+                                  forecastData={forecastData}/>
             ) : (conditionSelected && currentBox === 2) ? (
                 <ConditionGraphBox Name={conditionSelected.Name}
                                    className={conditionSelected.className}
                                    onClick={closeBox}
                                    switchButton={changeBox}
-                                   arrow={arrow}/>
+                                   arrow={arrow}
+                                   currentWeatherData={currentWeatherData}
+                                   forecastData={forecastData}/>
             ) : null
             }
 
@@ -88,14 +93,24 @@ const Condition = (props) => {
 };
 
 const ConditionDataBox = (props) => {
-    const [symptoms, risks] = ConditionXSymptoms(props)
+    const [symptoms, risks, levelValue, levelState] = ConditionXSymptoms(props)
+    let color = "black";
+
+    if (levelState === "High") {
+        color = "red";
+    }
+    else if (levelState === "Moderate") {
+        color = "orange";
+    }
+    else if (levelState === "Low") {
+        color = "green";
+    }
 
     return (
         <div className="symptoms-data-box">
             <div className="symptom-data-heading">
                 <img className="symptom-checker" src="/SymptomIcon.png" alt="an icon displaying a magnifying glass"/>
-                {/* Here add api call for determining condition*/}
-                <h2>{props.Name} - <span className="condition-severity">High</span></h2>
+                <h2>{props.Name} - <span className="condition-severity" style={{ color: color}}>{levelValue} ({levelState})</span> </h2>
                 <button className="close-button" onClick={props.onClick}></button>
             </div>
 
@@ -130,25 +145,70 @@ const ConditionDataBox = (props) => {
 
 function ConditionXSymptoms(props) {
     let condition = props.Name;
+    // https://iaq.works/humidity/indoor-humidity-level-why-is-the-40-60-range-ideal/#:~:text=When%20your%20home's%20humidity%20falls,experience%20freezing%20temperatures%20and%20snowfall.
+    // Low humidity: < 40%
+    // High humidity: > 60%
     if (condition === "Humidity") {
-        const symptoms = ['Overheating - Excessive Sweating', 'Heat rashes', 'Dehydration']
-        const risks = ['Heart Attack']
-        return ([symptoms, risks])
+        let condition_level = props.currentWeatherData.humidity;
+        console.log(condition_level);
+        if (condition_level < 40) {
+            // Low
+            const symptoms = ['Dry Skin', 'Bloody nose', 'Scratchy Throat']
+            const risks = ['Allergic Reactions']
+            return ([symptoms, risks, condition_level, "Low"])
+        }
+        else if (condition_level >= 40 && condition_level <= 60) {
+            const symptoms = ['Dry Skin', 'Excessive Sweating', 'Dehydration'];
+            const risks = ['Asthma'];
+            return ([symptoms, risks, condition_level, "Moderate"])
+        }
+        else {
+            // High
+            const symptoms = ['Overheating - Excessive Sweating', 'Heat rashes', 'Dehydration']
+            const risks = ['Heart Attack']
+            return ([symptoms, risks, condition_level, "High"])
+        }
+
     }
     else if (condition === "Pollen") {
+        // When pollen is added, uncomment
+        // let condition_level = props.currentWeatherData.pollen;
+        // console.log(condition_level);
         const symptoms = ['Sneezing', 'Blocked Nose', 'Red/Watery Eyes']
         const risks = ['Asthma']
-        return ([symptoms, risks])
+        return ([symptoms, risks, 0, "Undetermined"])
     }
     else if (condition === "UVI") {
+        let condition_level = props.currentWeatherData.uvIndex;
+        let condition_state = "Undetermined";
+        // console.log(condition_level);
+        if (condition_level >= 5) {
+            condition_state = "High";
+        }
+        else if (condition_level < 5){
+            condition_state = "Low";
+        }
         const symptoms = ['Bumps', 'Red Blotchy Areas', 'Fever'];
         const risks = ['Skin Cancer']
-        return ([symptoms, risks])
+        return ([symptoms, risks, condition_level, condition_state])
     }
     else if (condition === "AQI") {
+        let condition_level = props.currentWeatherData.aqi;
+        let condition_state = "Undetermined";
+        // Determined level here:
+        // https://openweathermap.org/api/air-pollution
+        if (condition_level >= 4) {
+            condition_state = "High";
+        }
+        else if (condition_level === 3) {
+            condition_state = "Moderate";
+        }
+        else if (condition_level <= 5){
+            condition_state = "Low";
+        }
         const symptoms = ['Shortness of breath', 'Wheezing', 'Chest Tightness   ']
         const risks = ['Strokes']
-        return ([symptoms, risks])
+        return ([symptoms, risks, condition_level, condition_state])
     }
 }
 
