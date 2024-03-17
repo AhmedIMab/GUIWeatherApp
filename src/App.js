@@ -119,7 +119,7 @@ const App = () => {
 
   return (
     <div>
-      <IphoneProMax />
+      <IphoneProMax forecastData={forecastData} currentWeatherData={currentWeatherData} />
       {/* show the icon */}
       { currentWeatherData ? <img src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`} alt="weather icon" /> : null }
     </div>
