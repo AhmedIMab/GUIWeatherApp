@@ -9,8 +9,8 @@ export const DailyWeather = ({
   today = new Date().getDay(),
 
   // Lowest temperature, highest temperature ----> call API to change
-  lowest_temperature= ["22°", "25°", "26°", "23°", "24°",  "27°", "28°"],
-  highest_temperature= ["25°", "28°", "29°", "26°", "27°",  "30°", "31°"],
+  lowest_temperature,
+  highest_temperature,
   
   // weather icon ----> call API to change weather icon
   colorOnWrapperOutline = ["/outline-27.svg", "/outline-25.svg", "/outline-23.svg", 
@@ -36,7 +36,7 @@ export const DailyWeather = ({
           key={index}
           onClick={() => handleDayClick(index)}>
           <div className="high-temp-text">High</div>
-          <div className="high-temp">{highest_temperature[index]}</div>
+          <div className="high-temp">{highest_temperature[index]}°</div>
           <ColorOnWrapper
             className="sunny-img"
             color="on"
@@ -45,7 +45,7 @@ export const DailyWeather = ({
             outlineClassName="element-sunny-instance"
           />
 
-          <div className="low-temp">{lowest_temperature[index]}</div>
+          <div className="low-temp">{lowest_temperature[index]}°</div>
           <div className="low-temp-text">Low</div>
           <div className={`weekday  ${selectedDay === index ? "selected" : ""} `}>{dates[(today - 1 + index) % 7]}</div>
         </div>

@@ -6,11 +6,11 @@ const Weather = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [airPollutionData, setAirPollutionData] = useState(null);
     const fetchData = async () => {
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid={YOUR_API_KEY}`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=a484704a1f7fd5d6f7fa69419cdbf252`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
             .then(response => {
                 const weatherData = response.data;
                 const { lon, lat } = weatherData.coord; // get longitude and latitude for air pollution data (doesn't take city as a parameter, as far as I know)
-                return axios.get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid={YOUR_API_KEY}`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
+                return axios.get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
                     .then(response => {
                         return { weatherData, airPollutionData: response.data };
                     });
