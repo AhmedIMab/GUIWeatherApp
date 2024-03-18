@@ -21,9 +21,9 @@ export function WeatherTotal() {
   // current weather data
   const [currentWeatherData, setCurrentWeatherData] = useState(null);
   // forecast data
-  const [forecastData, setForecastData] = useState(null); // all data combined
+  const [forecastData, setForecastData] = useState(null);
 
-  // each data weathre
+  // hourly data weather icon
   const[lowest_temperature, set_lowest_temperature] = useState(["22", "25", "26", "23", "24",  "27", "28"]);
   const[highest_temperature, set_highest_temperature] = useState(["25", "28", "29", "26", "27",  "30", "31"]);
 
@@ -32,7 +32,7 @@ export function WeatherTotal() {
   const [prop, setProp] = useState([17, 12, 21, 15, 7, 9, 9]);
   // 2.weather icon
   const [weatherIcon, setWeatherIcon] = useState(["/outline-17.svg", "/outline-15.svg", "/outline-13.svg", "/outline-11.svg", "/union-4.svg", "/outline-9.svg", "/outline-7.svg"]);
-  const [weatherIconDaily, setWeatherIconDaily] = useState(["/outline-17.svg", "/outline-15.svg", "/outline-13.svg", "/outline-11.svg", "/union-4.svg", "/outline-9.svg", "/outline-7.svg"]);
+  const [weatherIconDaily, setWeatherIconDaily] = useState(["09d", "09d", "09d", "09d", "09d", "09d", "09d"]);
 
   // 3.temperature svg
   const temperature = "/vector.svg";
@@ -68,6 +68,8 @@ export function WeatherTotal() {
       // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
       const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe/London`);
       const weatherCode = weatherData.data.daily.weather_code;
+
+      // set weather icon for daily weather
       for (let i = 0; i < weatherData.data.daily.weather_code.length; i++) {
           if (weatherCode[i] === 0) {
               weatherCode[i] = '01d';
@@ -97,7 +99,7 @@ export function WeatherTotal() {
               weatherCode[i] = '11d';
           }
       }
-      console.log('weather code', weatherCode);
+
       const forecastDataObjectTmp = {
         // daily
         dailyData: {
@@ -117,14 +119,11 @@ export function WeatherTotal() {
       set_highest_temperature(forecastDataObjectTmp.dailyData.maxTemp);
       setWeatherIconDaily(forecastDataObjectTmp.dailyData.icon);
 
-      console.log('forecast data object', forecastDataObject);
-      // setForecastData(forecastDataObject);
       // add is_day to the current weather data object
       const currentWeatherDataObject = {
         ...currentWeatherData,
         isDay: weatherData.data.current.is_day
       };
-      console.log('current weather data object', currentWeatherDataObject);
       setCurrentWeatherData(currentWeatherDataObject);
     }
     catch (error) {
@@ -140,43 +139,27 @@ export function WeatherTotal() {
     fetchData();
   }, []);
 
-
-
-
   function updateDay(newDay) {
     setSelectedDay(newDay);
-    console.log(forecastDataObject)
     // if forecastDataObject is not null, then update the prop and weatherIcon
     if (forecastDataObject) {
-      // 获取当前小时数
       const currentHour = new Date().getHours();
       setProp(forecastDataObject.hourlyData.precipitationProbability.slice(selectedDay * 24 + currentHour, selectedDay * 24 + currentHour + 7));
     } else {
       console.log('forecastDataObject is null');
     }
-
-
-    // // *********** To delete ***********
-    // // Now, to show the change, we random set above data
-    // for (let i = 0; i < 7; i++) {
-    //   prop[i] = Math.floor(Math.random() * 100);
-    //   const tmp = [17, 15, 13, 7, 11, 9, 9]
-    //   weatherIcon[i] = "/outline-" + tmp[Math.floor(Math.random() * 7)] + ".svg";
-    // }
-    // setprop([...prop]);
-    // setWeatherIcon([...weatherIcon]);
-    // // *********** To delete ***********
   }
-
-
-
 
   return (
     <>
+      {/* hourly weather ---- section 3  */}
       <div className="weather-hourly">
         <div className="hourly-dock">
+
+          {/* current hour*/}
           <TimeWrapper />
 
+          {/* weather icon */}
           <div className="dock-section">
             <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[0]} />
             <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[1]} />
@@ -186,9 +169,13 @@ export function WeatherTotal() {
             <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[5]} />
             <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[6]} />
           </div>
+          
+          {/* rainfall graph --- TODO */}
           <div className="dock-section">
             <img className="graph" alt="Vector" src={temperature} />
           </div>
+
+          {/* rainfall logo */}
           <div className="dock-section">
             <WeatherIcon className="icon-wrapper" subtract="/subtract.svg" />
             <WeatherIcon className="icon-wrapper" subtract="/subtract.svg" />
@@ -198,6 +185,8 @@ export function WeatherTotal() {
             <WeatherIcon className="icon-wrapper" subtract="/subtract.svg" />
             <WeatherIcon className="icon-wrapper" subtract="/subtract.svg" />
           </div>
+
+          {/* Rainfall probability */}
           <div className="dock-section">
             <div className="temp-text">{prop[0]}%</div>
             <div className="temp-text">{prop[1]}%</div>
@@ -210,7 +199,13 @@ export function WeatherTotal() {
 
         </div>
       </div>
-    <DailyWeather setSelectedDay={updateDay} selectedDay={selectedDay} lowest_temperature={lowest_temperature} highest_temperature={highest_temperature} weatherIconDaily={weatherIconDaily}/>
+
+      {/* Daily weather ------ section 4*/}
+      <DailyWeather setSelectedDay={updateDay} 
+                    selectedDay={selectedDay} 
+                    lowest_temperature={lowest_temperature}
+                    highest_temperature={highest_temperature}
+                    weatherIconDaily={weatherIconDaily}/>
     </>
 
   );
