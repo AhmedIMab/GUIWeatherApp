@@ -1,6 +1,6 @@
 import React from "react";
 import Weather from "./Weather";
-import { IphoneProMax } from "./screens/IphoneProMax";
+import { IphoneProMax } from "./screens/IphoneProMax/IphoneProMax";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
