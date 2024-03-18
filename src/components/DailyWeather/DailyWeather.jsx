@@ -10,6 +10,7 @@ export const DailyWeather = ({
   // Lowest temperature, highest temperature ----> call API to change
   lowest_temperature,
   highest_temperature,
+  weatherIconDaily,
   
   // weather icon ----> call API to change weather icon
   colorOnWrapperOutline = ["/outline-27.svg", "/outline-25.svg", "/outline-23.svg", 
@@ -33,12 +34,14 @@ export const DailyWeather = ({
         <div className={`weekday ${item} ${selectedDay === index ? "selected" : ""} `} 
           key={index}
           onClick={() => handleDayClick(index)}>
-          <div className="high-temp-text">High</div>
+          <div className="high-temp-text">High </div>
           <div className="high-temp">{highest_temperature[index]}°</div>
           <ColorOnWrapper
             className="sunny-img"
             color="on"
-            outline={colorOnWrapperOutline[index]}
+            // outline={colorOnWrapperOutline[index]}
+            outline={`http://openweathermap.org/img/w/${weatherIconDaily[index]}.png`} 
+
             hasOutline={colorOnWrapperHasOutline}
             outlineClassName="element-sunny-instance"
           />

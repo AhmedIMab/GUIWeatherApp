@@ -32,6 +32,8 @@ export function WeatherTotal() {
   const [prop, setProp] = useState([17, 12, 21, 15, 7, 9, 9]);
   // 2.weather icon
   const [weatherIcon, setWeatherIcon] = useState(["/outline-17.svg", "/outline-15.svg", "/outline-13.svg", "/outline-11.svg", "/union-4.svg", "/outline-9.svg", "/outline-7.svg"]);
+  const [weatherIconDaily, setWeatherIconDaily] = useState(["/outline-17.svg", "/outline-15.svg", "/outline-13.svg", "/outline-11.svg", "/union-4.svg", "/outline-9.svg", "/outline-7.svg"]);
+
   // 3.temperature svg
   const temperature = "/vector.svg";
 
@@ -46,15 +48,12 @@ export function WeatherTotal() {
       .then(response => {
         const weatherData = response.data;
         const { lon, lat } = weatherData.coord; // get longitude and latitude for air pollution data (doesn't take city as a parameter, as far as I know)
-        fetchData();
         return axios.get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
           .then(response => {
             return { weatherData, airPollutionData: response.data };
           });
       })
       .then(({ weatherData, airPollutionData }) => {
-        console.log(weatherData); // Weather data
-        console.log(airPollutionData); // Air pollution data
         setWeatherData(weatherData);
         setAirPollutionData(airPollutionData);
       })
@@ -67,13 +66,45 @@ export function WeatherTotal() {
   const fetchData = async () => {
     try {
       // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
-      const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min&timezone=Europe/London`);
+      const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability&&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe/London`);
+      const weatherCode = weatherData.data.daily.weather_code;
+      for (let i = 0; i < weatherData.data.daily.weather_code.length; i++) {
+          if (weatherCode[i] === 0) {
+              weatherCode[i] = '01d';
+          }
+          else if (weatherCode[i] === 1) {
+              weatherCode[i] = '02d';
+          }
+          else if (weatherCode[i] === 2) {
+              weatherCode[i] = '03d';
+          }
+          else if (weatherCode[i] === 3) {
+              weatherCode[i] = '04d';
+          }
+          else if (weatherCode[i] === 45 || weatherCode[i] === 48) {
+              weatherCode[i] = '50d';
+          }
+          else if (50 < weatherCode[i] < 66) {
+              weatherCode[i] = '09d';
+          }
+          else if (70 < weatherCode[i] < 80) {
+              weatherCode[i] = '13d';
+          }
+          else if (79 < weatherCode[i] < 90) {
+              weatherCode[i] = '10d';
+          }
+          else if (90 < weatherCode[i] < 100) {
+              weatherCode[i] = '11d';
+          }
+      }
+      console.log('weather code', weatherCode);
       const forecastDataObjectTmp = {
         // daily
         dailyData: {
           maxTemp: weatherData.data.daily.temperature_2m_max,
           minTemp: weatherData.data.daily.temperature_2m_min,
-          date: weatherData.data.daily.time
+          date: weatherData.data.daily.time,
+          icon: weatherCode
         },
         hourlyData: {
           precipitationProbability: weatherData.data.hourly.precipitation_probability,
@@ -84,6 +115,7 @@ export function WeatherTotal() {
       setForecastDataObject(forecastDataObjectTmp);
       set_lowest_temperature(forecastDataObjectTmp.dailyData.minTemp);
       set_highest_temperature(forecastDataObjectTmp.dailyData.maxTemp);
+      setWeatherIconDaily(forecastDataObjectTmp.dailyData.icon);
 
       console.log('forecast data object', forecastDataObject);
       // setForecastData(forecastDataObject);
@@ -178,7 +210,7 @@ export function WeatherTotal() {
 
         </div>
       </div>
-    <DailyWeather setSelectedDay={updateDay} selectedDay={selectedDay} lowest_temperature={lowest_temperature} highest_temperature={highest_temperature}/>
+    <DailyWeather setSelectedDay={updateDay} selectedDay={selectedDay} lowest_temperature={lowest_temperature} highest_temperature={highest_temperature} weatherIconDaily={weatherIconDaily}/>
     </>
 
   );

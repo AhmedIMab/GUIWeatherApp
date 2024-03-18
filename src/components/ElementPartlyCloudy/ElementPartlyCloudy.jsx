@@ -11,6 +11,7 @@ export const ElementPartlyCloudy = ({ color, className, outline = "/img/outline-
   return (
     <div className={`element-partly-cloudy ${className}`}>
       <img className="outline" alt="Outline" src={color === "on" ? outline : "/img/outline-33.svg"} />
+      {/* <img className="outline"  src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`} alt="weather icon" /> */}
     </div>
   );
 };
