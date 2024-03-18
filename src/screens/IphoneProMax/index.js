@@ -1,1 +1,1 @@
-export { IphoneProMax } from "./IphoneProMax";
+export { MobileWeather } from "./MobileWeather";

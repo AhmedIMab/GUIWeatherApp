@@ -1,6 +1,6 @@
 import React from "react";
 import Weather from "./Weather";
-import { IphoneProMax } from "./screens/IphoneProMax";
+import { MobileWeather } from "./screens/IphoneProMax";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -127,7 +127,7 @@ const App = () => {
 
   return (
     <div>
-      <IphoneProMax forecastData={forecastData} currentWeatherData={currentWeatherData} />
+      <MobileWeather forecastData={forecastData} currentWeatherData={currentWeatherData} />
       {/* show the icon */}
       { currentWeatherData ? <img src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`} alt="weather icon" /> : null }
     </div>
