@@ -7,7 +7,6 @@ export const DailyWeather = ({
   classNames = ["day", "day", "day", "day", "day", "day", "day"],
   dates = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
   today = new Date().getDay(),
-
   // Lowest temperature, highest temperature ----> call API to change
   lowest_temperature,
   highest_temperature,
@@ -24,7 +23,6 @@ export const DailyWeather = ({
 }) => {
   const handleDayClick = (index) => {
     setSelectedDay(index);
-    console.log("Selected day: ", selectedDay, dates[(today - 1 + index) % 7])
   };
   
   return (
@@ -47,7 +45,7 @@ export const DailyWeather = ({
 
           <div className="low-temp">{lowest_temperature[index]}°</div>
           <div className="low-temp-text">Low</div>
-          <div className={`weekday  ${selectedDay === index ? "selected" : ""} `}>{dates[(today - 1 + index) % 7]}</div>
+          <div className={`weekday  ${selectedDay === index ? "selected" : ""} `}>{dates[(today + 6 + index) % 7]}</div>
         </div>
       ))}
     </div>
