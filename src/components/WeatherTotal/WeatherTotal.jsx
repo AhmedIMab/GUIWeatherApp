@@ -170,12 +170,12 @@ export function WeatherTotal() {
           {/* weather icon */}
           <div className="dock-section">
             <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[selectedDay * 24 + currentHour]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 1) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 2) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 3) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 4) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 5) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
-            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 6) >= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 1) <= 167 ? (selectedDay * 24 + currentHour + 1) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 2) <= 167 ? (selectedDay * 24 + currentHour + 2) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 3) <= 167 ? (selectedDay * 24 + currentHour + 3) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 4) <= 167 ? (selectedDay * 24 + currentHour + 4) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 5) <= 167 ? (selectedDay * 24 + currentHour + 5) : 167]} />
+            <ElementPartlyCloudy className="dock-img" color="on" outline={weatherIcon[(selectedDay * 24 + currentHour + 6) <= 167 ? (selectedDay * 24 + currentHour + 6) : 167]} />
           </div>
 
           {/* rainfall graph --- TODO */}
@@ -198,11 +198,11 @@ export function WeatherTotal() {
           <div className="dock-section">
             <div className="temp-text">{prop[0]}%</div>
             <div className="temp-text">{prop[1] == null ? prop[0] : prop[1]}%</div>
-            <div className="temp-text">{prop[2] == null ? prop[0] : prop[1]}%</div>
-            <div className="temp-text">{prop[3] == null ? prop[0] : prop[1]}%</div>
-            <div className="temp-text">{prop[4] == null ? prop[0] : prop[1]}%</div>
-            <div className="temp-text">{prop[5] == null ? prop[0] : prop[1]}%</div>
-            <div className="temp-text">{prop[6] == null ? prop[0] : prop[1]}%</div>
+            <div className="temp-text">{prop[2] == null ? prop[0] : prop[2]}%</div>
+            <div className="temp-text">{prop[3] == null ? prop[0] : prop[3]}%</div>
+            <div className="temp-text">{prop[4] == null ? prop[0] : prop[4]}%</div>
+            <div className="temp-text">{prop[5] == null ? prop[0] : prop[5]}%</div>
+            <div className="temp-text">{prop[6] == null ? prop[0] : prop[6]}%</div>
           </div>
 
         </div>
