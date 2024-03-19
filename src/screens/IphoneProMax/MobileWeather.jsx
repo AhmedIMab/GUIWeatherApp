@@ -1,17 +1,9 @@
-import { ElementCloudyClearAt } from "../../components/ElementCloudyClearAt";
-import { ElementHeavyRain } from "../../components/ElementHeavyRain";
-import { ElementPartlyCloudy } from "../../components/ElementPartlyCloudy";
-import { ElementPartlyCloudyWrapper } from "../../components/ElementPartlyCloudyWrapper";
-import { ElementSunny } from "../../components/ElementSunny";
-import { WeatherIcon } from "../../components/WeatherIcon";
-import { DailyWeather } from "../../components/DailyWeather";
 import { ConditionsBoxContainer} from "../../components/Conditions/ConditionsBoxContainer";
-import { TimeWrapper } from "../../components/TimeWrapper";
 import { WeatherTotal } from "../../components/WeatherTotal";
 import "../../index.css";
 
 
-export const IphoneProMax = () => {
+export const MobileWeather = ({ forecastData, currentWeatherData }) => {
   return (
     <div className="iphone-pro-max">
       {/*First section*/}
@@ -40,7 +32,7 @@ export const IphoneProMax = () => {
       <WeatherTotal />
 
       {/*Fourth section*/}
-      <ConditionsBoxContainer />
+      <ConditionsBoxContainer forecastData={forecastData} currentWeatherData={currentWeatherData} />
       
     </div>
   );
