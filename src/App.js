@@ -13,6 +13,15 @@ const App = () => {
   // forecast data
   const [forecastData, setForecastData] = useState(null);
 
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchCurrentData();
+  };
+
   // function for changing the weather code to the icon
   const changeWeatherCodeToIcon = (weatherCode) => {
     for (let i = 0; i < weatherCode.length; i++) {
@@ -122,7 +131,7 @@ const App = () => {
   };
   useEffect(() => {
     fetchCurrentData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (lat && lon) {
@@ -132,6 +141,17 @@ const App = () => {
 
   return (
     <div>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={city}
+                    onChange={handleInputChange}
+                    placeholder="Search for a city"
+                />
+                <button type="submit">Search</button>
+            </form>
+        </div>
       <MobileWeather
         forecastData={forecastData}
         currentWeatherData={currentWeatherData}
