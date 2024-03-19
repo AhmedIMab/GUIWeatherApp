@@ -17,7 +17,12 @@ export const MobileWeather = ({ forecastData, currentWeatherData }) => {
             <div className="location-icon" />
           </div>
           <div className="header-conditions-wrapper">
-            <img className="weather-img" src="/sunny-cloudy.png" alt="weather img"/>
+            {currentWeatherData ? (
+            <img
+              src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`}
+              alt="weather icon"
+            />
+            ) : null}
             <div className="side-wrapper">
               <div className="degree">25°</div>
               <div className="weather-condition">Sunny</div>
