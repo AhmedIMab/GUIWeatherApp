@@ -221,7 +221,12 @@ const ConditionGraphBox = (props) => {
                 <button className="close-button" onClick={props.onClick}></button>
             </div>
             <ConditionsChart Name={props.Name}
-                             className={props.className}/>
+                             className={props.className}
+                             currentWeatherData={props.currentWeatherData}
+                             forecastData={props.forecastData}/>
+            <div className="page-control-image">
+                <img src="/Page%20Control2.png" alt=""/>
+            </div>
             <button className={props.arrow} onClick={props.switchButton}></button>
         </div>
     )
