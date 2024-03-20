@@ -3,7 +3,7 @@ import { WeatherTotal } from "../../components/WeatherTotal";
 import "../../index.css";
 
 
-export const MobileWeather = ({ forecastData, currentWeatherData }) => {
+export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) => {
   return (
     <div className="iphone-pro-max">
       {/*First section*/}
@@ -13,7 +13,7 @@ export const MobileWeather = ({ forecastData, currentWeatherData }) => {
             <div className="menu">
               <img className="icons-menu" src="/menuIcon.png" alt="menu icon"/>
             </div>
-            <div className="location">London</div>
+            <div className="location">{currentWeatherData.city}</div>
             <div className="location-icon" />
           </div>
           <div className="header-conditions-wrapper">
@@ -34,7 +34,7 @@ export const MobileWeather = ({ forecastData, currentWeatherData }) => {
       </div>
       
       {/*Second & Three section*/}
-      <WeatherTotal />
+      <WeatherTotal lat={lat} lon={lon} />
 
       {/*Fourth section*/}
       <ConditionsBoxContainer forecastData={forecastData} currentWeatherData={currentWeatherData} />

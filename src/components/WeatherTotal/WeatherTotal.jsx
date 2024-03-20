@@ -11,12 +11,14 @@ import { ElementSunny } from "../ElementSunny";
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-export function WeatherTotal() {
-  const [city, setCity] = useState('London');
+// not passing down the API data from App.js to WeatherTotal leads to unnecessary API calls
+export function WeatherTotal({ lat, lon }) {
+  const [city, setCity] = useState("London");
+  // setCity(props.city);
   const [weatherData, setWeatherData] = useState(null);
   const [airPollutionData, setAirPollutionData] = useState(null);
-  const [lat, setLat] = useState(51.5085);
-  const [lon, setLon] = useState(-0.1257);
+  // const [lat, setLat] = useState(51.5085);
+  // const [lon, setLon] = useState(-0.1257);
 
   // current weather data
   const [currentWeatherData, setCurrentWeatherData] = useState(null);
@@ -141,11 +143,18 @@ export function WeatherTotal() {
 
   useEffect(() => {
     fetchCurData();
-  }, []);
+  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (lat && lon) {
+      fetchData();
+    }
+  }, [lat, lon]);
+
+  // update selected city
+  // useEffect(() => {
+  //   setCity(props.city);
+  // }, [props.city]);
 
   function updateDay(newDay) {
     setSelectedDay(newDay);
