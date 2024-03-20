@@ -89,12 +89,11 @@ const App = () => {
       const weatherData = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability,weather_code&&daily=temperature_2m_max,temperature_2m_min,weather_code,uv_index_max&timezone=Europe/London`
       );
-      // 5 day weather forecast for aqi (hourly for next four days)
+      // 4 day weather forecast for aqi (hourly for next four days)
       const weatherAQI = await axios.get(
         `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`
       );
-      console.log("WEATHER AQI", weatherAQI);
-      // 5 day weather forecast for humidity (hourly for next four days) from open weather map
+      // 5 day weather forecast for humidity from open weather map
       const weatherHumidity = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=a484704a1f7fd5d6f7fa69419cdbf252`
       );
@@ -128,6 +127,7 @@ const App = () => {
           temperature: weatherData.data.hourly.temperature_2m,
           date: weatherData.data.hourly.time,
           icon: hourlyWeatherCode,
+          aqi: weatherAQI.data.list,
         },
       };
       console.log("forecast data object", forecastDataObject);
