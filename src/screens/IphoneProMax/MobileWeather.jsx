@@ -54,7 +54,6 @@ export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) =>
 
       {/*Fourth section*/}
       <ConditionsBoxContainer forecastData={forecastData} currentWeatherData={currentWeatherData} />
-      
     </div>
   );
 };
