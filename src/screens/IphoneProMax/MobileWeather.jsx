@@ -1,9 +1,26 @@
 import { ConditionsBoxContainer} from "../../components/Conditions/ConditionsBoxContainer";
 import { WeatherTotal } from "../../components/WeatherTotal";
 import "../../index.css";
+import { useEffect } from "react";
 
 
 export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) => {
+  // check if data is ready before rendering
+  if (!forecastData || !currentWeatherData || !lat || !lon) {
+    return <div>Loading...</div>;
+  }
+  if (currentWeatherData) {
+    if (currentWeatherData.city === undefined || currentWeatherData.icon === undefined) {
+      return <div>Loading...</div>;
+    }
+  }
+
+  // useEffect(() => { 
+  //   console.log('currentWeatherData', currentWeatherData);
+  //   console.log('forecastData', forecastData);
+  // }, [currentWeatherData, forecastData]);
+
+
   return (
     <div className="iphone-pro-max">
       {/*First section*/}
@@ -13,16 +30,14 @@ export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) =>
             <div className="menu">
               <img className="icons-menu" src="/menuIcon.png" alt="menu icon"/>
             </div>
-            <div className="location">{currentWeatherData.city}</div>
+              <div className="location">{currentWeatherData.city}</div>
             <div className="location-icon" />
           </div>
           <div className="header-conditions-wrapper">
-            {currentWeatherData ? (
             <img
               src={`http://openweathermap.org/img/w/${currentWeatherData.icon}.png`}
               alt="weather icon"
             />
-            ) : null}
             <div className="side-wrapper">
               <div className="degree">25°</div>
               <div className="weather-condition">Sunny</div>
