@@ -87,8 +87,19 @@ const App = () => {
     try {
       // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
       const weatherData = await axios.get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability,weather_code&&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe/London`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability,weather_code&&daily=temperature_2m_max,temperature_2m_min,weather_code,uv_index_max&timezone=Europe/London`
       );
+      // 5 day weather forecast for aqi (hourly for next four days)
+      const weatherAQI = await axios.get(
+        `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`
+      );
+      console.log("WEATHER AQI", weatherAQI);
+      // 5 day weather forecast for humidity (hourly for next four days) from open weather map
+      const weatherHumidity = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=a484704a1f7fd5d6f7fa69419cdbf252`
+      );
+      // create a list of 5 humidity values for each day
+      const humidityList = weatherHumidity.data.list.map((day) => day.humidity);
       console.log(
         "weather data weather code",
         weatherData.data.daily.weather_code
@@ -108,6 +119,8 @@ const App = () => {
           minTemp: weatherData.data.daily.temperature_2m_min,
           date: weatherData.data.daily.time,
           icon: dailyWeatherCode,
+          uvIndex: weatherData.data.daily.uv_index_max,
+          humidity: humidityList,
         },
         hourlyData: {
           precipitationProbability:
