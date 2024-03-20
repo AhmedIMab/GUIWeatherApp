@@ -120,6 +120,9 @@ const App = () => {
       console.log("forecast data object", forecastDataObject);
       setForecastData(forecastDataObject);
       // add is_day to the current weather data object
+      if (currentWeatherData === null) {
+        console.log("current weather data is null");
+      }
       const currentWeatherDataObject = {
         ...currentWeatherData,
         isDay: weatherData.data.current.is_day,
@@ -132,13 +135,13 @@ const App = () => {
   };
   useEffect(() => {
     fetchCurrentData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (lat && lon) {
       fetchData();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
