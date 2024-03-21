@@ -173,10 +173,10 @@ function ConditionXSymptoms(props) {
         let condition_level = props.forecastData.dailyData.pollenData[0][0];
         let condition_state = "Undetermined";
         // console.log(condition_level);
-        if (condition_level >= 5) {
+        if (condition_level >= 3) {
             condition_state = "High";
         }
-        else if (condition_level < 5){
+        else if (condition_level < 3){
             condition_state = "Low";
         }
         const symptoms = ['Sneezing', 'Blocked Nose', 'Red/Watery Eyes']
