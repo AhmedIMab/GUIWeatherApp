@@ -100,6 +100,39 @@
   margin-left: 4%;
   width: 14px;
   margin-top: 5%;
+  height: 25px;
+}
+
+/* Style for search input */
+.search-input {
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: aliceblue;
+  padding: 2%;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+/* Style for search button */
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding-left: 0;
+}
+
+.search-button i,
+.search-button img {
+  width: 24px; /* Size of the icon */
+  height: 24px; /* Size of the icon */
 }
 
 .iphone-pro-max .weather-img {

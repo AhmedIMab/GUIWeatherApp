@@ -15,13 +15,22 @@ const App = () => {
   // ensure that loading is finished before rendering
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleInputChange = (e) => {
-    setCity(e.target.value);
+  // Function to handle search submission
+  const handleSubmit = (e, toggleSearchBarVisibility) => {
+    e.preventDefault();
+    if (city.trim() !== "") {
+      fetchCurrentData().then(() => {
+        // Toggle search bar visibility after fetching data
+        if (toggleSearchBarVisibility) {
+          toggleSearchBarVisibility(false);
+        }
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchCurrentData();
+  // Function to handle input changes
+  const handleInputChange = (e) => {
+    setCity(e.target.value);
   };
 
   useEffect(() => {
@@ -80,7 +89,7 @@ const App = () => {
     const utc = date.getTime() + date.getTimezoneOffset() * 60000;
     const newDate = new Date(utc + 1000 * timezone);
     return newDate;
-  }
+  };
 
   // fetch data for real-time weather, air pollution, and UV index
   const fetchCurrentData = async () => {
@@ -131,14 +140,18 @@ const App = () => {
       const weatherAQI = await axios.get(
         `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`
       );
-      // 5 day pollen forecast - note: we are using TREE POLLEN 
+      // 5 day pollen forecast - note: we are using TREE POLLEN
       const weatherPollen = await axios.get(
         `https://pollen.googleapis.com/v1/forecast:lookup?key=AIzaSyAzyS76Iqms2XUebSlIrSBgH1NjRLAsTQw&location.longitude=${lon}&location.latitude=${lat}&days=5`
       );
       // add the pollen index
-      let pollenData = weatherPollen.data.dailyInfo.map((day) => day.pollenTypeInfo[1].indexInfo.value);
+      let pollenData = weatherPollen.data.dailyInfo.map(
+        (day) => day.pollenTypeInfo[1].indexInfo.value
+      );
       // make it so the pollen data holds three arrays, one for the pollen index, one for the category, and one for date
-      const pollenCategory = weatherPollen.data.dailyInfo.map((day) => day.pollenTypeInfo[1].indexInfo.category);
+      const pollenCategory = weatherPollen.data.dailyInfo.map(
+        (day) => day.pollenTypeInfo[1].indexInfo.category
+      );
       const pollenDate = weatherPollen.data.dailyInfo.map((day) => day.date);
       pollenData = [pollenData, pollenCategory, pollenDate];
       // 5 day weather forecast for humidity from open weather map
@@ -197,23 +210,16 @@ const App = () => {
 
   return (
     <div>
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={city}
-                    onChange={handleInputChange}
-                    placeholder="Search for a city"
-                />
-                <button type="submit">Search</button>
-            </form>
-        </div>
       {!isLoading && (
         <MobileWeather
           forecastData={forecastData}
           currentWeatherData={currentWeatherData}
           lat={lat}
           lon={lon}
+          city={city}
+          fetchCurrentData={fetchCurrentData}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
         />
       )}
     </div>
