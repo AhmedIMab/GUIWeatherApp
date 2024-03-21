@@ -1,15 +1,9 @@
-import PropTypes from "prop-types";
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { ColorOnWrapper } from "../ColorOnWrapper";
 import "./WeatherTotal.css";
 import { DailyWeather } from "../DailyWeather";
 import { TimeWrapper } from "../TimeWrapper";
 import { WeatherIcon } from "../WeatherIcon";
 import { ElementPartlyCloudy } from "../ElementPartlyCloudy";
-import { ElementCloudyClearAt } from "../ElementCloudyClearAt";
-import { ElementSunny } from "../ElementSunny";
-import ReactDOM from 'react-dom';
-import axios from 'axios';
 
 export function WeatherTotal({ forecastData, currentWeatherData }) {
 

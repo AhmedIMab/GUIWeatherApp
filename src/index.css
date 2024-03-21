@@ -1,5 +1,5 @@
-.iphone-pro-max {
-  background-image: url(/static/img/creative-painting-2.png);
+.mobile-weather {
+  background-image: url(/public/creative-painting-2.png);
   background-position: 50% 50%;
   background-size: cover;
   height: 932px;
@@ -14,7 +14,7 @@
 
 /*FIRST SECTION*/
 
-.iphone-pro-max .header {
+.mobile-weather .header {
   position: relative;
   width: 95%;
   height: 17%;
@@ -22,39 +22,39 @@
   flex-direction: row;
 }
 
-.iphone-pro-max .doctor-img {
+.mobile-weather .doctor-img {
   object-fit: cover;
   position: relative;
   margin-left: 5%;
 }
 
-.iphone-pro-max .header-wrapper {
+.mobile-weather .header-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 57%;
 }
 
-.iphone-pro-max .header-conditions-wrapper {
+.mobile-weather .header-conditions-wrapper {
   position: relative;
   display: flex;
   flex-direction: row;
   margin-top: 7%;
 }
 
-.iphone-pro-max .location-wrapper {
+.mobile-weather .location-wrapper {
   position: relative;
   display: flex;
   flex-direction: row;
 }
 
-.iphone-pro-max .side-wrapper {
+.mobile-weather .side-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.iphone-pro-max .location {
+.mobile-weather .location {
   color: #ffffff;
   font-family: "Convergence", Helvetica;
   font-size: 30px;
@@ -65,7 +65,7 @@
   margin-left: 4%;
 }
 
-.iphone-pro-max .menu {
+.mobile-weather .menu {
   align-items: center;
   justify-content: center;
   overflow: hidden;
@@ -73,13 +73,13 @@
   margin-top: 7%;
 }
 
-.iphone-pro-max .icons-menu {
+.mobile-weather .icons-menu {
   height: 24px;
   position: relative;
   width: 24px;
 }
 
-.iphone-pro-max .degree {
+.mobile-weather .degree {
   color: #ffffff;
   font-family: "Calibri-Bold", Helvetica;
   font-size: 65px;
@@ -93,8 +93,8 @@
   margin-left: 10%;
 }
 
-.iphone-pro-max .location-icon {
-  background-image: url(/static/img/subtract-14.svg);
+.mobile-weather .location-icon {
+  background-image: url(/public/subtract-14.svg);
   background-size: 100% 100%;
   position: relative;
   margin-left: 4%;
@@ -135,12 +135,12 @@ form {
   height: 24px; /* Size of the icon */
 }
 
-.iphone-pro-max .weather-img {
+.mobile-weather .weather-img {
   height: 88px;
   position: relative;
 }
 
-.iphone-pro-max .weather-condition {
+.mobile-weather .weather-condition {
   color: #ffffff;
   font-family: "Convergence", Helvetica;
   font-size: 25px;
@@ -151,7 +151,7 @@ form {
 }
 
 /*SECOND SECTION*/
-.iphone-pro-max .weather-hourly {
+.mobile-weather .weather-hourly {
   height: 16%;
   position: relative;
   width: 93%;
@@ -160,20 +160,20 @@ form {
   border-radius: 20px;
 }
 
-.iphone-pro-max .hourly-dock {
+.mobile-weather .hourly-dock {
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
 }
 
-.iphone-pro-max .dock-section {
+.mobile-weather .dock-section {
   position: relative;
   display: flex;
   flex-direction: row;
 }
 
-.iphone-pro-max .time {
+.mobile-weather .time {
   color: #898989;
   font-family: "Calibri-Regular", Helvetica;
   font-size: 10px;
@@ -186,7 +186,7 @@ form {
   margin-right: 4.25%;
 }
 
-.iphone-pro-max .graph {
+.mobile-weather .graph {
   height: 3%;
   position: relative;
   width: 90%;
@@ -194,14 +194,14 @@ form {
   margin-top: 2%;
 }
 
-.iphone-pro-max .dock-img {
+.mobile-weather .dock-img {
   position: relative;
   margin-top: 1.5%;
   margin-left: 3.15%;
   margin-right: 3.15%;
 }
 
-.iphone-pro-max .icon-wrapper {
+.mobile-weather .icon-wrapper {
   position: relative;
   margin: auto;
   margin-top: 1%;
@@ -209,7 +209,7 @@ form {
   margin-right: 6.15%;
 }
 
-.iphone-pro-max .temp-text {
+.mobile-weather .temp-text {
   color: #000000;
   font-family: "Calibri-Regular", Helvetica;
   font-size: 10px;
@@ -241,7 +241,7 @@ form {
 }
 
 /*THIRD SECTION*/
-.iphone-pro-max .weather-weekly {
+.mobile-weather .weather-weekly {
   height: 15%;
   align-content: center;
   position: relative;
@@ -251,7 +251,7 @@ form {
   flex-direction: row;
 }
 
-.iphone-pro-max .fourth-day,
+.mobile-weather .fourth-day,
 .sixth-day {
   background-color: #fffafa;
   border-radius: 10px;
@@ -263,7 +263,7 @@ form {
   flex-direction: column;
 }
 
-.iphone-pro-max .day {
+.mobile-weather .day {
   margin-right: 1%;
   margin-left: 1%;
   display: flex;
