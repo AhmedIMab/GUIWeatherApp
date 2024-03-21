@@ -46,6 +46,13 @@ const App = () => {
         weatherCode[i] = "11d";
       }
     }
+    // From 6 a.m. to 6 p.m. it is day time, otherwise it is night time, change it to xx n
+    for (let i = 0; i < weatherCode.length; i++) {
+      let hour = i % 24;
+      if (hour <= 6 || hour >= 18) {
+        weatherCode[i] = weatherCode[i].slice(0, 2) + "n";
+      }
+    }
     return weatherCode;
   };
 
@@ -103,7 +110,6 @@ const App = () => {
       const pollenCategory = weatherPollen.data.dailyInfo.map((day) => day.pollenTypeInfo[1].indexInfo.category);
       const pollenDate = weatherPollen.data.dailyInfo.map((day) => day.date);
       pollenData = [pollenData, pollenCategory, pollenDate];
-      console.log("pollen data", pollenData);
       // 5 day weather forecast for humidity from open weather map
       const weatherHumidity = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=a484704a1f7fd5d6f7fa69419cdbf252`
@@ -142,7 +148,6 @@ const App = () => {
           aqi: weatherAQI.data.list,
         },
       };
-      console.log("forecast data object", forecastDataObject);
       setForecastData(forecastDataObject);
       // add is_day to the current weather data object
       if (currentWeatherData === null) {

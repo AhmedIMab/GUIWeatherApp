@@ -11,25 +11,12 @@ import { ElementSunny } from "../ElementSunny";
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-// not passing down the API data from App.js to WeatherTotal leads to unnecessary API calls
-export function WeatherTotal({ lat, lon }) {
-  const [city, setCity] = useState("London");
-  // setCity(props.city);
-  const [weatherData, setWeatherData] = useState(null);
-  const [airPollutionData, setAirPollutionData] = useState(null);
-  // const [lat, setLat] = useState(51.5085);
-  // const [lon, setLon] = useState(-0.1257);
-
-  // current weather data
-  const [currentWeatherData, setCurrentWeatherData] = useState(null);
-  // forecast data
-  const [forecastData, setForecastData] = useState(null);
+export function WeatherTotal({ forecastData, currentWeatherData }) {
 
   // hourly data weather icon
   const [lowest_temperature, set_lowest_temperature] = useState(["22", "25", "26", "23", "24", "27", "28"]);
   const [highest_temperature, set_highest_temperature] = useState(["25", "28", "29", "26", "27", "30", "31"]);
 
-  // according to the selectedDay, call weather API to change the following data
   // 1.prop
   const [prop, setProp] = useState([17, 12, 21, 15, 7, 9, 9]);
   // 2.weather icon
@@ -47,121 +34,25 @@ export function WeatherTotal({ lat, lon }) {
   
   const [currentHour, setCurrentHour] = useState(new Date().getHours());
 
-  const fetchCurData = async () => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=a484704a1f7fd5d6f7fa69419cdbf252`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
-      .then(response => {
-        const weatherData = response.data;
-        const { lon, lat } = weatherData.coord; // get longitude and latitude for air pollution data (doesn't take city as a parameter, as far as I know)
-        return axios.get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=a484704a1f7fd5d6f7fa69419cdbf252`) // replace {YOUR_API_KEY} with your OpenWeatherMap API key
-          .then(response => {
-            return { weatherData, airPollutionData: response.data };
-          });
-      })
-      .then(({ weatherData, airPollutionData }) => {
-        setWeatherData(weatherData);
-        setAirPollutionData(airPollutionData);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  // function for changing the weather code to the icon
-  const changeWeatherCodeToIcon = (weatherCode) => {
-    for (let i = 0; i < weatherCode.length; i++) {
-      if (weatherCode[i] === 0) {
-        weatherCode[i] = '01d';
-      }
-      else if (weatherCode[i] === 1) {
-        weatherCode[i] = '02d';
-      }
-      else if (weatherCode[i] === 2) {
-        weatherCode[i] = '03d';
-      }
-      else if (weatherCode[i] === 3) {
-        weatherCode[i] = '04d';
-      }
-      else if (weatherCode[i] === 45 || weatherCode[i] === 48) {
-        weatherCode[i] = '50d';
-      }
-      else if (50 < weatherCode[i] < 66) {
-        weatherCode[i] = '09d';
-      }
-      else if (70 < weatherCode[i] < 80) {
-        weatherCode[i] = '13d';
-      }
-      else if (79 < weatherCode[i] < 90) {
-        weatherCode[i] = '10d';
-      }
-      else if (90 < weatherCode[i] < 100) {
-        weatherCode[i] = '11d';
-      }
-    }
-    return weatherCode;
-  };
-
   // fetch data for the next 5 days
-  const fetchData = async () => {
-    try {
-      // 7 day weather forecast (hourly temperature and precipitation probability) and current is_day
-      const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=is_day&hourly=temperature_2m,precipitation_probability,weather_code&&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe/London`);
-      const dailyWeatherCode = changeWeatherCodeToIcon(weatherData.data.daily.weather_code);
-      const hourlyWeatherCode = changeWeatherCodeToIcon(weatherData.data.hourly.weather_code);
-      
-      const forecastDataObjectTmp = {
-        // daily
-        dailyData: {
-          maxTemp: weatherData.data.daily.temperature_2m_max,
-          minTemp: weatherData.data.daily.temperature_2m_min,
-          date: weatherData.data.daily.time,
-          icon: dailyWeatherCode
-        },
-        hourlyData: {
-          precipitationProbability: weatherData.data.hourly.precipitation_probability,
-          temperature: weatherData.data.hourly.temperature_2m,
-          date: weatherData.data.hourly.time,
-          icon: hourlyWeatherCode
-        }
-      };
-      setForecastDataObject(forecastDataObjectTmp);
-      set_lowest_temperature(forecastDataObjectTmp.dailyData.minTemp);
-      set_highest_temperature(forecastDataObjectTmp.dailyData.maxTemp);
-      setWeatherIconDaily(forecastDataObjectTmp.dailyData.icon);
-      setWeatherIcon(forecastDataObjectTmp.hourlyData.icon);
-      // console.log(forecastDataObjectTmp.hourlyData.icon)
-      // add is_day to the current weather data object
-      const currentWeatherDataObject = {
-        ...currentWeatherData,
-        isDay: weatherData.data.current.is_day
-      };
-      setCurrentWeatherData(currentWeatherDataObject);
-    }
-    catch (error) {
-      console.error(error);
-    }
+  const setData = async () => {
+    setForecastDataObject(forecastData);
+    set_lowest_temperature(forecastData.dailyData.minTemp);
+    set_highest_temperature(forecastData.dailyData.maxTemp);
+    setWeatherIconDaily(forecastData.dailyData.icon);
+    setWeatherIcon(forecastData.hourlyData.icon);
   };
 
   useEffect(() => {
-    fetchCurData();
-  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (lat && lon) {
-      fetchData();
-    }
-  }, [lat, lon]);
-
-  // update selected city
-  // useEffect(() => {
-  //   setCity(props.city);
-  // }, [props.city]);
+    setData();
+  }, [forecastData, currentWeatherData]);
 
   function updateDay(newDay) {
     setSelectedDay(newDay);
     // if forecastDataObject is not null, then update the prop and weatherIcon
     if (forecastDataObject) {
       const currentHour = new Date().getHours();
-      setProp(forecastDataObject.hourlyData.precipitationProbability.slice(selectedDay * 24 + currentHour, selectedDay * 24 + currentHour + 7));
+      setProp(forecastDataObject.hourlyData.precipitationProbability.slice(newDay * 24 + currentHour, newDay * 24 + currentHour + 7));
     } else {
       console.log('forecastDataObject is null');
     }
