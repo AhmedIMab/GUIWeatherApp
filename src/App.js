@@ -1,5 +1,5 @@
 import React from "react";
-import { MobileWeather } from "./screens/IphoneProMax";
+import { MobileWeather } from "./MobileWeatherIndex";
 import axios from "axios";
 import { useState, useEffect } from "react";
 

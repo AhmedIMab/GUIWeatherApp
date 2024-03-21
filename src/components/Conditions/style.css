@@ -1,5 +1,5 @@
 /* Currently using absolute positioning, change later */
-.iphone-pro-max .conditions-box-container {
+.mobile-weather .conditions-box-container {
   height: 388px;
   width: 383px;
   margin-top: 5%;
@@ -7,7 +7,7 @@
   display: flex;
 }
 
-.iphone-pro-max .condition {
+.mobile-weather .condition {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,7 +18,7 @@
   width: 180px;
 }
 
-.iphone-pro-max .humidity {
+.mobile-weather .humidity {
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgb(112.27, 161.84, 94.86) 0%,
@@ -28,7 +28,7 @@
   left: 0;
 }
 
-.iphone-pro-max .pollen {
+.mobile-weather .pollen {
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgb(205.76, 193.53, 83.45) 0%,
@@ -38,7 +38,7 @@
   top: 0;
 }
 
-.iphone-pro-max .aqi {
+.mobile-weather .aqi {
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgb(255, 104.12, 113.18) 0%,
@@ -48,7 +48,7 @@
   top: 208px;
 }
 
-.iphone-pro-max .uvi {
+.mobile-weather .uvi {
   background: radial-gradient(
     50% 50% at 50% 50%,
     rgb(245.43, 194.43, 95.44) 0%,
@@ -58,7 +58,7 @@
   top: 208px;
 }
 
-.iphone-pro-max .text-wrapper-symptom-button {
+.mobile-weather .text-wrapper-symptom-button {
   color: #ffffff;
   background-color: transparent;
   border: none;
@@ -140,7 +140,7 @@
 
 }
 
-.iphone-pro-max .text-wrapper-symptom-button {
+.mobile-weather .text-wrapper-symptom-button {
   color: #ffffff;
   background-color: transparent;
   border: none;

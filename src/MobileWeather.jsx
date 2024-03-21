@@ -1,6 +1,6 @@
-import { ConditionsBoxContainer } from "../../components/Conditions/ConditionsBoxContainer";
-import { WeatherTotal } from "../../components/WeatherTotal";
-import "../../index.css";
+import { ConditionsBoxContainer } from "./components/Conditions/ConditionsBoxContainer";
+import { WeatherTotal } from "./components/WeatherTotal";
+import "./index.css";
 import { useState } from "react";
 
 export const MobileWeather = ({
@@ -38,7 +38,7 @@ export const MobileWeather = ({
   };
 
   return (
-    <div className="iphone-pro-max">
+    <div className="mobile-weather">
       {/*First section*/}
       <div className="header">
         <div className="header-wrapper">
