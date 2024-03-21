@@ -65,7 +65,7 @@ export function WeatherTotal({ forecastData, currentWeatherData }) {
         <div className="hourly-dock">
 
           {/* current hour*/}
-          <TimeWrapper />
+          <TimeWrapper currentWeatherData={currentWeatherData} />
 
           {/* weather icon */}
           <div className="dock-section">

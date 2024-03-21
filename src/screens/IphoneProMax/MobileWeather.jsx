@@ -4,20 +4,7 @@ import "../../index.css";
 // import { useEffect, useState } from "react";
 
 export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) => {
-  // check if data is ready before rendering
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   if (currentWeatherData && forecastData) {
-  //     setIsLoading(false);
-  //   }
-  // }
-  // , [currentWeatherData, forecastData]);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
+  // check if the data is loaded
   if (!forecastData || !currentWeatherData || !lat || !lon) {
     return <div>Loading...</div>;
   }
