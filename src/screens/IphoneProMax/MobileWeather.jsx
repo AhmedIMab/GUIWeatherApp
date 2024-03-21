@@ -20,6 +20,7 @@ export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) =>
   //   console.log('forecastData', forecastData);
   // }, [currentWeatherData, forecastData]);
 
+  console.log('icon', currentWeatherData.icon)
 
   return (
     <div className="iphone-pro-max">
