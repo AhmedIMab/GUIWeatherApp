@@ -1,21 +1,32 @@
 import { ConditionsBoxContainer} from "../../components/Conditions/ConditionsBoxContainer";
 import { WeatherTotal } from "../../components/WeatherTotal";
 import "../../index.css";
-import { useEffect } from "react";
-
+// import { useEffect, useState } from "react";
 
 export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) => {
   // check if data is ready before rendering
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   if (currentWeatherData && forecastData) {
+  //     setIsLoading(false);
+  //   }
+  // }
+  // , [currentWeatherData, forecastData]);
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
   if (!forecastData || !currentWeatherData || !lat || !lon) {
     return <div>Loading...</div>;
   }
+
   if (currentWeatherData) {
     if (currentWeatherData.city === undefined || currentWeatherData.icon === undefined) {
       return <div>Loading...</div>;
     }
   }
-
-  console.log('icon', currentWeatherData.icon)
 
   return (
     <div className="iphone-pro-max">

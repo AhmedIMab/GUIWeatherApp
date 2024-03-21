@@ -12,7 +12,8 @@ const App = () => {
   const [currentWeatherData, setCurrentWeatherData] = useState(null);
   // forecast data
   const [forecastData, setForecastData] = useState(null);
-  // ensure that the city passed down only changes when the form is submitted
+  // ensure that loading is finished before rendering
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -22,6 +23,24 @@ const App = () => {
     e.preventDefault();
     fetchCurrentData();
   };
+
+  useEffect(() => {
+    if (currentWeatherData && forecastData) {
+      setIsLoading(false);
+    }
+  }, [currentWeatherData, forecastData]);
+
+  useEffect(() => {
+    if (lat && lon) {
+      fetchCurrentData();
+    }
+  }, [lat]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (lat && lon && currentWeatherData) {
+      fetchData();
+    }
+  }, [lat]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // function for changing the weather code to the icon
   const changeWeatherCodeToIcon = (weatherCode) => {
@@ -163,15 +182,6 @@ const App = () => {
       console.error(error);
     }
   };
-  useEffect(() => {
-    fetchCurrentData();
-  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (lat && lon) {
-      fetchData();
-    }
-  }, [lat, lon]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
@@ -186,12 +196,14 @@ const App = () => {
                 <button type="submit">Search</button>
             </form>
         </div>
-      <MobileWeather
-        forecastData={forecastData}
-        currentWeatherData={currentWeatherData}
-        lat={lat}
-        lon={lon}
-      />
+      {!isLoading && (
+        <MobileWeather
+          forecastData={forecastData}
+          currentWeatherData={currentWeatherData}
+          lat={lat}
+          lon={lon}
+        />
+      )}
     </div>
   );
 };
