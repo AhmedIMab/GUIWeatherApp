@@ -117,7 +117,6 @@ function determineData(name, forecastData) {
     }
     else if (name === "UVI") {
         let data = forecastData.dailyData.uvIndex.slice(0,4);
-
         return data;
     }
     else if (name === "AQI") {
