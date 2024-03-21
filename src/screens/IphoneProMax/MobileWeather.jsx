@@ -15,11 +15,6 @@ export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) =>
     }
   }
 
-  // useEffect(() => { 
-  //   console.log('currentWeatherData', currentWeatherData);
-  //   console.log('forecastData', forecastData);
-  // }, [currentWeatherData, forecastData]);
-
   console.log('icon', currentWeatherData.icon)
 
   return (
@@ -51,7 +46,7 @@ export const MobileWeather = ({ forecastData, currentWeatherData, lat, lon }) =>
       </div>
       
       {/*Second & Three section*/}
-      <WeatherTotal lat={lat} lon={lon} />
+      <WeatherTotal forecastData={forecastData} currentWeatherData={currentWeatherData} />
 
       {/*Fourth section*/}
       <ConditionsBoxContainer forecastData={forecastData} currentWeatherData={currentWeatherData} />

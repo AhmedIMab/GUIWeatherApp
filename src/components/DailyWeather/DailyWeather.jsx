@@ -30,7 +30,7 @@ export const DailyWeather = ({
           key={index}
           onClick={() => handleDayClick(index)}>
           <div className="high-temp-text">High </div>
-          <div className="high-temp">{highest_temperature[index]}°</div>
+          <div className="high-temp">{Math.round(highest_temperature[index])}°</div>
 
           {/* Weather Icon */}
           <ColorOnWrapper
@@ -41,7 +41,7 @@ export const DailyWeather = ({
             outlineClassName="element-sunny-instance"
           />
 
-          <div className="low-temp">{lowest_temperature[index]}°</div>
+          <div className="low-temp">{Math.round(lowest_temperature[index])}°</div>
           <div className="low-temp-text">Low</div>
 
           {/* weekday */}
