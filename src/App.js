@@ -75,6 +75,13 @@ const App = () => {
     return weatherCode;
   };
 
+  const changeDtTimezoneToTime = (dt, timezone) => {
+    const date = new Date(dt * 1000);
+    const utc = date.getTime() + date.getTimezoneOffset() * 60000;
+    const newDate = new Date(utc + 1000 * timezone);
+    return newDate;
+  }
+
   // fetch data for real-time weather, air pollution, and UV index
   const fetchCurrentData = async () => {
     try {
@@ -93,6 +100,10 @@ const App = () => {
       );
       setLat(lat);
       setLon(lon);
+      const dt = weatherData.data.dt;
+      const timezone = weatherData.data.timezone;
+      const time = changeDtTimezoneToTime(dt, timezone);
+      const hour = time.getHours();
       const weatherDataObject = {
         city: weatherData.data.name,
         temperature: Math.round(weatherData.data.main.temp),
@@ -101,6 +112,7 @@ const App = () => {
         humidity: weatherData.data.main.humidity,
         aqi: airPollutionData.data.list[0].main.aqi,
         uvIndex: UVIndexData.data.value,
+        time: hour,
       };
       setCurrentWeatherData(weatherDataObject);
     } catch (error) {
