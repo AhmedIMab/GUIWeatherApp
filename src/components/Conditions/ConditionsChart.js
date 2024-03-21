@@ -5,8 +5,6 @@ import "./style.css";
 
 
 export const ConditionsChart = (props) => {
-    // Replace with API Data!
-
     var event = new Date();
     var options = { weekday: 'long' };
     var current_day = event.toLocaleDateString('en-UK', options);
@@ -30,13 +28,18 @@ export const ConditionsChart = (props) => {
         }
     }
 
-    // Adds to the labels of the week days the subsequent weeks 5 weekdays
+    // sets the weekdays of the graph axis to the subsequent 4 weekdays
     var days = [];
     let counter = Number(current_day_num)
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<4; i++) {
         days[i] = week[counter % 7];
         counter += 1;
     }
+
+    console.log("TEST: !", props.forecastData)
+
+    const future_data = determineData(props.Name, props.forecastData);
+
 
     const data = {
         labels: days,
@@ -45,14 +48,10 @@ export const ConditionsChart = (props) => {
                 backgroundColor: "rgb(0,0,0)",
                 borderColor: "rgb(55,95,255)",
                 /* Replace with API call */
-                data: [0, 40, 25, 60, 2, null, null],
+                data: future_data,
             }
         ],
     };
-
-    // The ... mean a spread operator. This is used to pass into the Max function arguments
-    // as it doesn't take in a whole array
-    let max_value = Math.max(...data.datasets[0].data);
 
     return (
         <div className="conditions-chart-container">
@@ -64,7 +63,14 @@ export const ConditionsChart = (props) => {
                     plugins: {
                         title: {
                             display: true,
-                            text: props.Name + " for the next 5 days"
+                            text: props.Name + " for the next 4 days",
+                            color: '#000000',
+                            font: {
+                                size: 15
+                            },
+                            padding: {
+                                bottom: 18
+                            }
                         },
                         legend: {
                             display: false
@@ -72,10 +78,21 @@ export const ConditionsChart = (props) => {
                     },
                     scales: {
                         y: {
-                            min: 0,
-                            max: max_value+15,
+                            grid: {
+                            },
                             ticks: {
-                                stepSize: 15
+                                color: '#000000',
+                                font: {
+                                    size: 15
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#000000',
+                                font: {
+                                    size: 15
+                                }
                             }
                         }
                     }
@@ -85,4 +102,47 @@ export const ConditionsChart = (props) => {
     )
 }
 
+
+function determineData(name, forecastData) {
+    if (name === "Humidity") {
+        let data = [];
+        // As only 4 days needed
+        data = forecastData.dailyData.humidity.slice(0,4);
+
+        return data;
+    }
+    else if (name === "Pollen") {
+        let data = forecastData.dailyData.pollenData[0];
+        return data
+    }
+    else if (name === "UVI") {
+        let data = forecastData.dailyData.uvIndex.slice(0,4);
+
+        return data;
+    }
+    else if (name === "AQI") {
+        let data = forecastData.hourlyData.aqi;
+        var daily_data = [];
+
+        // As the data for aqi is hourly, there are 96 array elements
+        // The following nested for loop will split it into the average of each day
+        // And use that value as the data for the next days
+        for (let i=0; i<4; i++) {
+            let offset = i * 24;
+            let day_data = 0;
+            for (let j=offset; j<offset+24; j++) {
+                let hour_aqi = data[j].main.aqi;
+                day_data += hour_aqi;
+            }
+            // Rounds to 2 decimal places
+            daily_data.push(Math.round((day_data/24) * 100) / 100);
+        }
+
+        return daily_data;
+    }
+}
+
+
+
 export default ConditionsChart;
+

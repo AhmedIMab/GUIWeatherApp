@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import ConditionsChart from "./ConditionsChart.js";
 import "./style.css";
 
-
 export const ConditionsBoxContainer = ({ forecastData, currentWeatherData }) => {
     // The conditionSelected variable is what is the current state
     // The setSelectedCondition is set to null because that is the useState parameter
@@ -171,12 +170,18 @@ function ConditionXSymptoms(props) {
 
     }
     else if (condition === "Pollen") {
-        // When pollen is added, uncomment
-        // let condition_level = props.currentWeatherData.pollen;
+        let condition_level = props.forecastData.dailyData.pollenData[0][0];
+        let condition_state = "Undetermined";
         // console.log(condition_level);
+        if (condition_level >= 5) {
+            condition_state = "High";
+        }
+        else if (condition_level < 5){
+            condition_state = "Low";
+        }
         const symptoms = ['Sneezing', 'Blocked Nose', 'Red/Watery Eyes']
         const risks = ['Asthma']
-        return ([symptoms, risks, 0, "Undetermined"])
+        return ([symptoms, risks, condition_level, condition_state])
     }
     else if (condition === "UVI") {
         let condition_level = props.currentWeatherData.uvIndex;
@@ -222,7 +227,12 @@ const ConditionGraphBox = (props) => {
                 <button className="close-button" onClick={props.onClick}></button>
             </div>
             <ConditionsChart Name={props.Name}
-                             className={props.className}/>
+                             className={props.className}
+                             currentWeatherData={props.currentWeatherData}
+                             forecastData={props.forecastData}/>
+            <div className="page-control-image">
+                <img src="/Page%20Control2.png" alt=""/>
+            </div>
             <button className={props.arrow} onClick={props.switchButton}></button>
         </div>
     )
