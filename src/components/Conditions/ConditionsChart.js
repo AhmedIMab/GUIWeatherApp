@@ -5,8 +5,6 @@ import "./style.css";
 
 
 export const ConditionsChart = (props) => {
-    // Replace with API Data!
-
     var event = new Date();
     var options = { weekday: 'long' };
     var current_day = event.toLocaleDateString('en-UK', options);
@@ -54,10 +52,6 @@ export const ConditionsChart = (props) => {
             }
         ],
     };
-
-    // The ... mean a spread operator. This is used to pass into the Max function arguments
-    // as it doesn't take in a whole array
-    let max_value = Math.max(...data.datasets[0].data);
 
     return (
         <div className="conditions-chart-container">
@@ -128,7 +122,6 @@ function determineData(name, forecastData) {
     }
     else if (name === "AQI") {
         let data = forecastData.hourlyData.aqi;
-        console.log("All forecast data: ", data)
         var daily_data = [];
 
         // As the data for aqi is hourly, there are 96 array elements
