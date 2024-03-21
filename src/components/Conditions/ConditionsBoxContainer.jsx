@@ -170,12 +170,18 @@ function ConditionXSymptoms(props) {
 
     }
     else if (condition === "Pollen") {
-        // When pollen is added, uncomment
-        // let condition_level = props.currentWeatherData.pollen;
+        let condition_level = props.forecastData.dailyData.pollenData[0][0];
+        let condition_state = "Undetermined";
         // console.log(condition_level);
+        if (condition_level >= 5) {
+            condition_state = "High";
+        }
+        else if (condition_level < 5){
+            condition_state = "Low";
+        }
         const symptoms = ['Sneezing', 'Blocked Nose', 'Red/Watery Eyes']
         const risks = ['Asthma']
-        return ([symptoms, risks, 0, "Undetermined"])
+        return ([symptoms, risks, condition_level, condition_state])
     }
     else if (condition === "UVI") {
         let condition_level = props.currentWeatherData.uvIndex;

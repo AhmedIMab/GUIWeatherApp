@@ -38,6 +38,8 @@ export const ConditionsChart = (props) => {
         counter += 1;
     }
 
+    console.log("TEST: !", props.forecastData)
+
     const future_data = determineData(props.Name, props.forecastData);
 
 
@@ -116,8 +118,7 @@ function determineData(name, forecastData) {
         return data;
     }
     else if (name === "Pollen") {
-        // Update after Eduards does it
-        let data = [0, 40, 25, 60];
+        let data = forecastData.dailyData.pollenData[0];
         return data
     }
     else if (name === "UVI") {
